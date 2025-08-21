@@ -11,25 +11,32 @@ import Settings from "./pages/Settings";
 import Reports from "./pages/Reports";
 import Products from "./pages/Products";
 import { ThemeProvider } from "./providers/theme-provider";
-
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "sonner";
+const queryClient = new QueryClient();
 function App() {
   return (
-    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Navigate to="/dashboard" />} />
+    <>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+          <Router>
+            <Routes>
+              <Route path="/" element={<Navigate to="/dashboard" />} />
 
-          <Route path="/" element={<DashboardLayout />}>
-            {/* -----------main outlets-------------- */}
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="users" element={<Users />} />
-            <Route path="products" element={<Products />} />
-            <Route path="reports" element={<Reports />} />
-            <Route path="settings" element={<Settings />} />
-          </Route>
-        </Routes>
-      </Router>
-    </ThemeProvider>
+              <Route path="/" element={<DashboardLayout />}>
+                {/* -----------main outlets-------------- */}
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="users" element={<Users />} />
+                <Route path="products" element={<Products />} />
+                <Route path="reports" element={<Reports />} />
+                <Route path="settings" element={<Settings />} />
+              </Route>
+            </Routes>
+          </Router>
+        </ThemeProvider>
+      </QueryClientProvider>
+      <Toaster position="top-right" richColors />
+    </>
   );
 }
 
