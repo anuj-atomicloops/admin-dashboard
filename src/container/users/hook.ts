@@ -12,18 +12,18 @@ const useUserHook = () => {
 
   const users = useHookstate(globalState.users);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const data = await api.get("/users");
-        users.set(data.reverse());
-      } catch (err) {
-        console.error("Error fetching users:", err);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchUsers = async () => {
+  //     try {
+  //       const data = await api.get("/users");
+  //       users.set(data.reverse());
+  //     } catch (err) {
+  //       console.error("Error fetching users:", err);
+  //     }
+  //   };
 
-    fetchUsers();
-  }, []);
+  //   fetchUsers();
+  // }, []);
 
   const handleSubmit = async () => {
     console.log("Final form data (raw):", form);
@@ -56,7 +56,7 @@ const useUserHook = () => {
     }
   };
 
-   const handleDelete = async (id: string) => {
+  const handleDelete = async (id: string) => {
     try {
       await api.delete(`/users/${id}`);
       users.set((prev) => prev.filter((user: any) => user.id !== id));

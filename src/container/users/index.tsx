@@ -31,7 +31,7 @@ export default function UsersContainer() {
       const user = row.original;
       return (
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+          <DropdownMenuTrigger >
             <Button variant="ghost" className="h-8 w-8 p-0">
               <MoreHorizontal className="h-4 w-4" />
             </Button>
@@ -44,7 +44,7 @@ export default function UsersContainer() {
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Edit customer details</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => console.log("del")}>
+            <DropdownMenuItem onClick={() => handleDelete(user.id)}>
               Delete customer
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -56,7 +56,7 @@ export default function UsersContainer() {
   const finalColumns = [...baseColumns, actionColumn];
 
   return (
-    <div className="border border-red-500 h-full">
+    <div className=" border-red-500 h-full">
       <h1 onClick={() => setPageTitle("")} className="text-2xl font-bold">
         {pageTitle === "" ? "Users management" : "Add new user"}
       </h1>

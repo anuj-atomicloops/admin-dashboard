@@ -1,5 +1,5 @@
 
-import UsersContainer from "@/layouts/users";
+import UsersContainer from "@/container/users";
 
 export default function Users() {
   return <UsersContainer />;

@@ -13,12 +13,30 @@ import Products from "./pages/Products";
 import { ThemeProvider } from "./providers/theme-provider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
+import { useHookstate } from "@hookstate/core";
+import { useEffect } from "react";
+import api from "./lib/api";
+import { globalState } from "./store/globalState";
 const queryClient = new QueryClient();
 function App() {
+  const users = useHookstate(globalState.users);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const data = await api.get("/users");
+        users.set(data.reverse());
+      } catch (err) {
+        console.error("Error fetching users:", err);
+      }
+    };
+
+    fetchUsers();
+  }, []);
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
           <Router>
             <Routes>
               <Route path="/" element={<Navigate to="/dashboard" />} />
