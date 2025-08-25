@@ -5,7 +5,7 @@
       "name": "Harry",
       "email": "anuj.kumar@atomicloops.com",
       "phone": "797974643",
-      "address": "",
+      "address": "Delhi, India",
       "role": "customer",
       "status": "active",
       "ordersCount": 0,
@@ -19,7 +19,7 @@
       "name": "Harry",
       "email": "anuj.kumar@atomicloops.com",
       "phone": "797974643",
-      "address": "",
+      "address": "Delhi, India",
       "role": "customer",
       "status": "active",
       "ordersCount": 0,
@@ -33,7 +33,7 @@
       "name": "Anuj Kumar",
       "email": "anuj.kumar@atomicloops.com",
       "phone": "797974643",
-      "address": "",
+      "address": "Bangalore, India",
       "role": "customer",
       "status": "active",
       "ordersCount": 0,
@@ -41,6 +41,99 @@
       "lastOrderDate": null,
       "createdAt": "2025-08-22T12:17:38.918Z",
       "lastLogin": null
+    },
+    {
+      "id": "us01",
+      "name": "Priya Sharma",
+      "email": "priya.sharma@example.com",
+      "phone": "9876543210",
+      "address": "Mumbai, India",
+      "role": "customer",
+      "status": "active",
+      "ordersCount": 2,
+      "totalSpent": 3500,
+      "lastOrderDate": "2025-08-23T15:10:00.000Z",
+      "createdAt": "2025-08-20T09:00:00.000Z",
+      "lastLogin": "2025-08-24T10:00:00.000Z"
+    },
+    {
+      "id": "us02",
+      "name": "Rohan Verma",
+      "email": "rohan.verma@example.com",
+      "phone": "9123456789",
+      "address": "Pune, India",
+      "role": "customer",
+      "status": "active",
+      "ordersCount": 1,
+      "totalSpent": 1500,
+      "lastOrderDate": "2025-08-24T12:30:00.000Z",
+      "createdAt": "2025-08-18T08:30:00.000Z",
+      "lastLogin": "2025-08-24T12:35:00.000Z"
+    }
+  ],
+  "products": [
+    {
+      "id": "prod01",
+      "name": "Wireless Headphones",
+      "category": "Electronics",
+      "description": "Noise-cancelling Bluetooth headphones with 20h battery life",
+      "price": 2500,
+      "availableQuantity": 50,
+      "salesReport": [
+        {
+          "saleId": "sale001",
+          "userId": "us01",
+          "quantityBought": 1,
+          "dateTime": "2025-08-23T15:10:00.000Z"
+        },
+        {
+          "saleId": "sale002",
+          "userId": "us02",
+          "quantityBought": 2,
+          "dateTime": "2025-08-24T12:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "prod02",
+      "name": "Laptop Bag",
+      "category": "Accessories",
+      "description": "Water-resistant 15-inch laptop backpack",
+      "price": 1500,
+      "availableQuantity": 100,
+      "salesReport": [
+        {
+          "saleId": "sale003",
+          "userId": "qnR",
+          "quantityBought": 1,
+          "dateTime": "2025-08-22T16:45:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "prod03",
+      "name": "Smartwatch",
+      "category": "Electronics",
+      "description": "Fitness tracking smartwatch with heart rate monitor",
+      "price": 5000,
+      "availableQuantity": 30,
+      "salesReport": [
+        {
+          "saleId": "sale004",
+          "userId": "us01",
+          "quantityBought": 1,
+          "dateTime": "2025-08-23T18:20:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "prod04",
+      "name": "Yoga Mat",
+      "category": "Fitness",
+      "description": "Eco-friendly non-slip yoga mat",
+      "price": 800,
+      "availableQuantity": 200,
+      "salesReport": []
     }
   ]
 }

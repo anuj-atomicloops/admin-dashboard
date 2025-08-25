@@ -59,21 +59,21 @@ const data = {
         { title: "Inactive Users", url: "/users/inactive" },
       ],
     },
-    {
-      title: "Reports",
-      url: "/reports",
-      icon: PieChart,
-      items: [
-        { title: "Daily", url: "/reports/daily" },
-        { title: "Monthly", url: "/reports/monthly" },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "/settings",
-      icon: Settings2,
-      items: [{ title: "General", url: "/settings/general" }],
-    },
+    // {
+    //   title: "Reports",
+    //   url: "/reports",
+    //   icon: PieChart,
+    //   items: [
+    //     { title: "Daily", url: "/reports/daily" },
+    //     { title: "Monthly", url: "/reports/monthly" },
+    //   ],
+    // },
+    // {
+    //   title: "Settings",
+    //   url: "/settings",
+    //   icon: Settings2,
+    //   items: [{ title: "General", url: "/settings/general" }],
+    // },
   ],
 
   products: [
@@ -91,21 +91,21 @@ const data = {
   ],
 
   projects: [
+    // {
+    //   name: "Design Engineering",
+    //   url: "#",
+    //   icon: Frame,
+    // },
     {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
+      name: "Dashboard",
+      url: "/dashboard",
       icon: PieChart,
     },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
+    // {
+    //   name: "Travel",
+    //   url: "#",
+    //   icon: Map,
+    // },
   ],
 };
 
@@ -117,9 +117,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         
       </SidebarHeader>
       <SidebarContent>
+        <NavProjects projects={data.projects} />
         <NavMain heading="User management" items={data.navMain} />
         <NavMain heading="Products" items={data.products} />
-        {/* <NavProjects projects={data.projects} /> */}
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />

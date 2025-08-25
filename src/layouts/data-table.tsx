@@ -1,5 +1,4 @@
 import {
-  type ColumnDef,
   type ColumnFiltersState,
   flexRender,
   getCoreRowModel,
@@ -29,7 +28,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export function DataTable({ setPageTitle, columns, data }: any) {
+export function DataTable({
+  searchBy = "email",
+  setPageTitle,
+  columns,
+  data,
+}: any) {
   console.log(columns, "data table");
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -62,17 +66,17 @@ export function DataTable({ setPageTitle, columns, data }: any) {
     <div>
       <div className="flex justify-between py-4  border-red-500">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          placeholder={`Search by ${searchBy}...`}
+          value={(table.getColumn(searchBy)?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
+            table.getColumn(searchBy)?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
         {/* -------------column and add new button-------------- */}
         <div className="flex gap-4 ">
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
+            <DropdownMenuTrigger>
               <Button variant="outline" className="ml-auto">
                 Columns
               </Button>

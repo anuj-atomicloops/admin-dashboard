@@ -1,19 +1,5 @@
-import Sidebar from "@/components/layout/Sidebar";
 import { Link, Outlet, useLocation } from "react-router-dom";
 
-// export default function DashboardLayout() {
-//   return (
-//     <div className="flex h-screen">
-//       {/* Sidebar */}
-//       <Sidebar />
-
-//       {/* Main Content */}
-//       <main className="flex-1 p-6 bg-red-100 overflow-y-auto">
-//         <Outlet />
-//       </main>
-//     </div>
-//   );
-// }
 
 import { AppSidebar } from "@/components/app-sidebar";
 import {

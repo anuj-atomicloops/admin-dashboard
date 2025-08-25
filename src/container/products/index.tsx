@@ -1,7 +1,5 @@
-import { UsersTableColumns } from "@/container/users/UsersTableColumns";
 import { DataTable } from "@/layouts/data-table";
-import useUserHook from "./useUserHook";
-import AddUserForm from "./AddUserForm";
+
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -12,7 +10,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
 
-export default function UsersContainer() {
+
+import useProductsHook from "./useProductsHook";
+import { ProductsTableColumns } from "./ProductsTableColumns";
+
+export default function ProductsContainer() {
   const {
     pageTitle,
     setPageTitle,
@@ -20,32 +22,32 @@ export default function UsersContainer() {
     handleChange,
     setForm,
     handleSubmit,
-    users,
+    products,
     handleDelete,
-  } = useUserHook();
+  } = useProductsHook();
 
   const actionColumn = {
     id: "actions",
     header: "Actions",
     cell: ({ row }: any) => {
-      const user = row.original;
+      const product = row.original;
       return (
         <DropdownMenu>
-          <DropdownMenuTrigger >
+          <DropdownMenuTrigger>
             <Button variant="ghost" className="h-8 w-8 p-0">
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(user.email)}
+              onClick={() => navigator.clipboard.writeText(product.id)}
             >
-              Copy customer email
+              Copy Product id
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Edit customer details</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => handleDelete(user.id)}>
-              Delete customer
+            <DropdownMenuItem onClick={() => handleDelete(product.id)}>
+              Delete Product
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -53,28 +55,21 @@ export default function UsersContainer() {
     },
   };
 
-  const finalColumns = [...UsersTableColumns, actionColumn];
+  const finalColumns = [...ProductsTableColumns, actionColumn];
 
   return (
     <div className=" border-red-500 h-full">
       <h1 onClick={() => setPageTitle("")} className="text-2xl font-bold">
-        {pageTitle === "" ? "Users management" : "Add new user"}
+        {pageTitle === "" ? "Products management" : "Add new Product"}
       </h1>
       {pageTitle === "" ? (
         <DataTable
           setPageTitle={setPageTitle}
           columns={finalColumns}
-          data={users.get()}
-          searchBy={"email"}
+          data={products.get()}
+          searchBy={"name"}
         />
-      ) : (
-        <AddUserForm
-          form={form}
-          setForm={setForm}
-          handleSubmit={handleSubmit}
-          handleChange={handleChange}
-        />
-      )}
+      ) : null}
     </div>
   );
 }

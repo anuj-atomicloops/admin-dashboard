@@ -19,20 +19,30 @@ import api from "./lib/api";
 import { globalState } from "./store/globalState";
 const queryClient = new QueryClient();
 function App() {
-  const users = useHookstate(globalState.users);
+  const store = useHookstate(globalState);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const data = await api.get("/users");
-        users.set(data.reverse());
+        store.users.set(data.reverse());
       } catch (err) {
         console.error("Error fetching users:", err);
       }
     };
+    const fetchProducts = async () => {
+      try {
+        const data = await api.get("/products");
+        store.products.set(data.reverse());
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
 
     fetchUsers();
+    fetchProducts();
   }, []);
+
   return (
     <>
       <QueryClientProvider client={queryClient}>
