@@ -1,54 +1,12 @@
 {
   "users": [
     {
-      "id": "qrR",
-      "name": "Harry",
-      "email": "anuj.kumar@atomicloops.com",
-      "phone": "797974643",
-      "address": "Delhi, India",
-      "role": "customer",
-      "status": "active",
-      "ordersCount": 0,
-      "totalSpent": 0,
-      "lastOrderDate": null,
-      "createdAt": "2025-08-21T12:17:38.918Z",
-      "lastLogin": null
-    },
-    {
-      "id": "qrcR",
-      "name": "Harry",
-      "email": "anuj.kumar@atomicloops.com",
-      "phone": "797974643",
-      "address": "Delhi, India",
-      "role": "customer",
-      "status": "active",
-      "ordersCount": 0,
-      "totalSpent": 0,
-      "lastOrderDate": null,
-      "createdAt": "2025-08-21T12:17:38.918Z",
-      "lastLogin": null
-    },
-    {
-      "id": "qnR",
-      "name": "Anuj Kumar",
-      "email": "anuj.kumar@atomicloops.com",
-      "phone": "797974643",
-      "address": "Bangalore, India",
-      "role": "customer",
-      "status": "active",
-      "ordersCount": 0,
-      "totalSpent": 0,
-      "lastOrderDate": null,
-      "createdAt": "2025-08-22T12:17:38.918Z",
-      "lastLogin": null
-    },
-    {
       "id": "us01",
       "name": "Priya Sharma",
       "email": "priya.sharma@example.com",
-      "phone": "9876543210",
+      "phone": "914654564654",
       "address": "Mumbai, India",
-      "role": "customer",
+      "gender": "female",
       "status": "active",
       "ordersCount": 2,
       "totalSpent": 3500,
@@ -60,15 +18,85 @@
       "id": "us02",
       "name": "Rohan Verma",
       "email": "rohan.verma@example.com",
-      "phone": "9123456789",
+      "phone": "917978999777",
       "address": "Pune, India",
-      "role": "customer",
+      "gender": "male",
       "status": "active",
       "ordersCount": 1,
       "totalSpent": 1500,
       "lastOrderDate": "2025-08-24T12:30:00.000Z",
       "createdAt": "2025-08-18T08:30:00.000Z",
       "lastLogin": "2025-08-24T12:35:00.000Z"
+    },
+    {
+      "id": "us03",
+      "name": "Natasha Singh",
+      "email": "natasha.singh@gmail.com",
+      "phone": "917876543210",
+      "address": "Delhi, India",
+      "gender": "female",
+      "status": "active",
+      "ordersCount": 0,
+      "totalSpent": 0,
+      "lastOrderDate": null,
+      "createdAt": "2025-08-24T10:18:30.190Z",
+      "lastLogin": null
+    },
+    {
+      "id": "us04",
+      "name": "Anushka Rao",
+      "email": "anushka.rao@gmail.com",
+      "phone": "917979746435",
+      "address": "Bangalore, India",
+      "gender": "female",
+      "status": "active",
+      "ordersCount": 0,
+      "totalSpent": 0,
+      "lastOrderDate": null,
+      "createdAt": "2025-08-25T10:44:39.894Z",
+      "lastLogin": null
+    },
+    {
+      "id": "us05",
+      "name": "Anuj Kumar",
+      "email": "anuj.kumar@atomicloops.com",
+      "phone": "917546888851",
+      "address": "Hyderabad, India",
+      "gender": "male",
+      "status": "active",
+      "ordersCount": 0,
+      "totalSpent": 0,
+      "lastOrderDate": null,
+      "createdAt": "2025-08-22T11:41:42.357Z",
+      "lastLogin": null
+    },
+    {
+      "id": "us06",
+      "name": "Tony Stark",
+      "email": "tony@gmail.com",
+      "phone": "917546888852",
+      "address": "New York, USA",
+      "gender": "male",
+      "status": "active",
+      "ordersCount": 0,
+      "totalSpent": 0,
+      "lastOrderDate": null,
+      "createdAt": "2025-08-22T11:50:35.812Z",
+      "lastLogin": null
+    },
+    {
+      "id": "us07",
+      "name": "Steve Rogers",
+      "email": "steve.rogers@gmail.com",
+      "phone": "917546888853",
+      "address": "Brooklyn, USA",
+      "gender": "male",
+      "status": "active",
+      "ordersCount": 0,
+      "totalSpent": 0,
+      "lastOrderDate": null,
+      "createdAt": "2025-08-23T09:20:00.000Z",
+      "lastLogin": null
     }
   ],
   "products": [
@@ -79,60 +107,87 @@
       "description": "Noise-cancelling Bluetooth headphones with 20h battery life",
       "price": 2500,
       "availableQuantity": 50,
-      "salesReport": [
-        {
-          "saleId": "sale001",
-          "userId": "us01",
-          "quantityBought": 1,
-          "dateTime": "2025-08-23T15:10:00.000Z"
-        },
-        {
-          "saleId": "sale002",
-          "userId": "us02",
-          "quantityBought": 2,
-          "dateTime": "2025-08-24T12:30:00.000Z"
-        }
-      ]
+      "salesReport": []
     },
     {
       "id": "prod02",
-      "name": "Laptop Bag",
-      "category": "Accessories",
-      "description": "Water-resistant 15-inch laptop backpack",
-      "price": 1500,
-      "availableQuantity": 100,
-      "salesReport": [
-        {
-          "saleId": "sale003",
-          "userId": "qnR",
-          "quantityBought": 1,
-          "dateTime": "2025-08-22T16:45:00.000Z"
-        }
-      ]
-    },
-    {
-      "id": "prod03",
       "name": "Smartwatch",
       "category": "Electronics",
       "description": "Fitness tracking smartwatch with heart rate monitor",
       "price": 5000,
       "availableQuantity": 30,
-      "salesReport": [
-        {
-          "saleId": "sale004",
-          "userId": "us01",
-          "quantityBought": 1,
-          "dateTime": "2025-08-23T18:20:00.000Z"
-        }
-      ]
+      "salesReport": []
+    },
+    {
+      "id": "prod03",
+      "name": "Leather Jacket",
+      "category": "Fashion",
+      "description": "Stylish black leather jacket for winter",
+      "price": 7500,
+      "availableQuantity": 20,
+      "salesReport": []
     },
     {
       "id": "prod04",
+      "name": "Sneakers",
+      "category": "Fashion",
+      "description": "Comfortable running sneakers for daily use",
+      "price": 3000,
+      "availableQuantity": 40,
+      "salesReport": []
+    },
+    {
+      "id": "prod05",
+      "name": "The Alchemist",
+      "category": "Books",
+      "description": "Inspirational novel by Paulo Coelho",
+      "price": 500,
+      "availableQuantity": 100,
+      "salesReport": []
+    },
+    {
+      "id": "prod06",
+      "name": "Atomic Habits",
+      "category": "Books",
+      "description": "Self-help book by James Clear",
+      "price": 600,
+      "availableQuantity": 80,
+      "salesReport": []
+    },
+    {
+      "id": "prod07",
+      "name": "Coffee Table",
+      "category": "Home",
+      "description": "Modern wooden coffee table",
+      "price": 2000,
+      "availableQuantity": 25,
+      "salesReport": []
+    },
+    {
+      "id": "prod08",
+      "name": "LED Lamp",
+      "category": "Home",
+      "description": "Energy-saving desk lamp",
+      "price": 1200,
+      "availableQuantity": 50,
+      "salesReport": []
+    },
+    {
+      "id": "prod09",
+      "name": "Football",
+      "category": "Sports",
+      "description": "Professional size 5 football",
+      "price": 1500,
+      "availableQuantity": 60,
+      "salesReport": []
+    },
+    {
+      "id": "prod10",
       "name": "Yoga Mat",
-      "category": "Fitness",
-      "description": "Eco-friendly non-slip yoga mat",
+      "category": "Sports",
+      "description": "Non-slip yoga mat for home and gym",
       "price": 800,
-      "availableQuantity": 200,
+      "availableQuantity": 100,
       "salesReport": []
     }
   ]

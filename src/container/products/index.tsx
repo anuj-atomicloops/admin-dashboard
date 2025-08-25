@@ -10,20 +10,20 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
 
-
 import useProductsHook from "./useProductsHook";
 import { ProductsTableColumns } from "./ProductsTableColumns";
 
 export default function ProductsContainer() {
   const {
-    pageTitle,
-    setPageTitle,
     form,
     handleChange,
     setForm,
     handleSubmit,
     products,
     handleDelete,
+    dialogOpen,
+    setDialogOpen,
+    categories
   } = useProductsHook();
 
   const actionColumn = {
@@ -45,7 +45,14 @@ export default function ProductsContainer() {
               Copy Product id
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Edit customer details</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                setForm({ ...product });
+                setDialogOpen(true);
+              }}
+            >
+              Edit product details
+            </DropdownMenuItem>
             <DropdownMenuItem onClick={() => handleDelete(product.id)}>
               Delete Product
             </DropdownMenuItem>
@@ -59,17 +66,24 @@ export default function ProductsContainer() {
 
   return (
     <div className=" border-red-500 h-full">
-      <h1 onClick={() => setPageTitle("")} className="text-2xl font-bold">
-        {pageTitle === "" ? "Products management" : "Add new Product"}
-      </h1>
-      {pageTitle === "" ? (
-        <DataTable
-          setPageTitle={setPageTitle}
-          columns={finalColumns}
-          data={products.get()}
-          searchBy={"name"}
-        />
-      ) : null}
+      <h1 className="text-2xl font-bold">Products management</h1>
+
+      <DataTable
+        columns={finalColumns}
+        data={products.get()}
+        searchBy={"name"}
+        // ----form dialog props-----------
+        dialogProps={{
+          title: "product",
+          form,
+          setForm,
+          handleSubmit,
+          handleChange,
+          open: dialogOpen,
+          setOpen: setDialogOpen,
+          categories
+        }}
+      />
     </div>
   );
 }

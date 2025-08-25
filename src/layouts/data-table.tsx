@@ -27,10 +27,11 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { FormDialog } from "@/container/dashboard/components/FormDialog";
 
 export function DataTable({
   searchBy = "email",
-  setPageTitle,
+  dialogProps,
   columns,
   data,
 }: any) {
@@ -101,13 +102,9 @@ export function DataTable({
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button
-            variant="ghost"
-            className="cursor-pointer bg-gray-600 text-white"
-            onClick={() => setPageTitle("add")}
-          >
-            Add New
-          </Button>
+          {/* -----add new user form dialog--------- */}
+
+          {dialogProps && <FormDialog {...dialogProps} />}
         </div>
       </div>
       <div className="overflow-hidden rounded-md border">

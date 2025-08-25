@@ -1,0 +1,64 @@
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import AddUserForm from "@/container/users/AddUserForm";
+import AddProductsrForm from "@/container/products/AddProductsrForm";
+
+export function FormDialog({
+  title,
+  form,
+  setForm,
+  handleSubmit,
+  handleChange,
+  open,
+  setOpen,
+  categories,
+}: any) {
+  const handleFormSubmit = async () => {
+    const success = await handleSubmit();
+    if (success) setOpen(false);
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button variant="default">Add new {title}</Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-lg max-h-[80vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>
+            {form?.id ? "Edit" : "Add new"} {title}
+          </DialogTitle>
+          <DialogDescription>
+            {form?.id
+              ? `Update details for this ${title}.`
+              : `Fill in the details below to create a new ${title}.`}
+          </DialogDescription>
+        </DialogHeader>
+
+        {title === "user" ? (
+          <AddUserForm
+            form={form}
+            setForm={setForm}
+            handleSubmit={handleFormSubmit}
+            handleChange={handleChange}
+          />
+        ) : (
+          <AddProductsrForm
+            form={form}
+            categories={categories}
+            setForm={setForm}
+            handleSubmit={handleFormSubmit}
+            handleChange={handleChange}
+          />
+        )}
+      </DialogContent>
+    </Dialog>
+  );
+}

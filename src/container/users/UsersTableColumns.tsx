@@ -65,9 +65,17 @@ export const UsersTableColumns: ColumnDef<any>[] = [
       );
     },
   },
+   {
+    accessorKey: "phone",
+    header: "Phone",
+  },
   {
     accessorKey: "status",
     header: "Status",
+  },
+    {
+    accessorKey: "gender",
+    header: "Gender",
   },
   {
     accessorKey: "ordersCount",

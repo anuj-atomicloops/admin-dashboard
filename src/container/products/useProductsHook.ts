@@ -1,83 +1,116 @@
 import useForm from "@/hooks/useForm";
-import { useEffect, useState } from "react";
 import { useHookstate } from "@hookstate/core";
 import { globalState } from "@/store/globalState";
 import api from "@/lib/api";
 import { toast } from "sonner";
 import { generateId } from "@/lib/utils";
+import { useState } from "react";
 
-const useProductsHook = () => {
-  const [pageTitle, setPageTitle] = useState("");
+const useProductHook = () => {
   const { form, handleChange, setForm, resetForm } = useForm();
-
+  const [dialogOpen, setDialogOpen] = useState(false);
   const products = useHookstate(globalState.products);
+  const categories = ["Electronics", "Fashion", "Books", "Home", "Sports"];
 
-  // useEffect(() => {
-  //   const fetchUsers = async () => {
-  //     try {
-  //       const data = await api.get("/users");
-  //       users.set(data.reverse());
-  //     } catch (err) {
-  //       console.error("Error fetching users:", err);
-  //     }
-  //   };
+  // --- Validation helper ---
+  const validateForm = () => {
+    if (!form.name || form.name.trim().length < 3) {
+      toast.error("Product name must be at least 3 characters long");
+      return null;
+    }
 
-  //   fetchUsers();
-  // }, []);
+    if (!form.category) {
+      toast.error("Please select a category");
+      return null;
+    }
 
-  // const handleSubmit = async () => {
-  //   console.log("Final form data (raw):", form);
+    if (!form.description || form.description.trim().length < 10) {
+      toast.error("Description must be at least 10 characters long");
+      return null;
+    }
 
-  //   const payload = {
-  //     id: generateId(),
-  //     name: form.name || "",
-  //     email: form.email || "",
-  //     phone: form.phone || "",
-  //     address: form.address || "",
-  //     role: form.role || "customer",
-  //     status: form.status || "active",
-  //     ordersCount: form.ordersCount ?? 0,
-  //     totalSpent: form.totalSpent ?? 0,
-  //     lastOrderDate: form.lastOrderDate || null,
-  //     createdAt: new Date().toISOString(),
-  //     lastLogin: null,
-  //   };
+    if (!form.price || Number(form.price) <= 0) {
+      toast.error("Price must be greater than 0");
+      return null;
+    }
 
-  //   // console.log("Payload ", payload);
+    if (
+      form.availableQuantity === undefined ||
+      form.availableQuantity === null ||
+      Number(form.availableQuantity) < 0
+    ) {
+      toast.error("Available Quantity must be 0 or more");
+      return null;
+    }
 
-  //   try {
-  //     const newUser = await api.post("/users", payload);
-  //     users.set((prev) => [newUser, ...prev]);
-  //     resetForm();
-  //     setPageTitle("");
-  //     toast.success("User added successfully");
-  //   } catch (err) {
-  //     console.error("Error submitting form:", err);
-  //   }
-  // };
+    return {
+      ...form,
+      price: Number(form.price),
+      availableQuantity: Number(form.availableQuantity),
+    };
+  };
 
-  // const handleDelete = async (id: string) => {
-  //   try {
-  //     await api.delete(`/users/${id}`);
-  //     users.set((prev) => prev.filter((user: any) => user.id !== id));
-  //     toast.success("User deleted successfully");
-  //   } catch (err) {
-  //     console.error("Error deleting user:", err);
-  //     toast.error("Failed to delete user ");
-  //   }
-  // };
+  const handleSubmit = async () => {
+    const validated = validateForm();
+    if (!validated) return false;
+
+    const isEdit = !!validated.id;
+
+    const payload = {
+      ...validated,
+      salesReport: validated.salesReport || [],
+      createdAt: isEdit ? validated.createdAt : new Date().toISOString(),
+    };
+
+    try {
+      let savedProduct;
+      if (isEdit) {
+        savedProduct = await api.put(`/products/${validated.id}`, payload);
+        products.set((prev) =>
+          prev.map((p: any) => (p.id === validated.id ? savedProduct : p))
+        );
+        toast.success("Product updated successfully");
+      } else {
+        payload.id = generateId();
+        savedProduct = await api.post("/products", payload);
+        products.set((prev) => [savedProduct, ...prev]);
+        toast.success("Product added successfully");
+      }
+
+      resetForm();
+      return true;
+    } catch (err) {
+      console.error("Error submitting product:", err);
+      toast.error(
+        isEdit ? "Failed to update product" : "Failed to add product"
+      );
+      return false;
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      await api.delete(`/products/${id}`);
+      products.set((prev) => prev.filter((p: any) => p.id !== id));
+      toast.success("Product deleted successfully");
+    } catch (err) {
+      console.error("Error deleting product:", err);
+      toast.error("Failed to delete product");
+    }
+  };
 
   return {
-    pageTitle,
-    setPageTitle,
     form,
-    // handleDelete,
+    handleDelete,
     handleChange,
     setForm,
     resetForm,
-    // handleSubmit,
+    handleSubmit,
     products,
+    dialogOpen,
+    setDialogOpen,
+    categories
   };
 };
 
-export default useProductsHook;
+export default useProductHook;

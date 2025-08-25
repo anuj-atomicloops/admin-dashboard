@@ -36,8 +36,12 @@ export const ProductsTableColumns: ColumnDef<any>[] = [
   },
   {
     accessorKey: "category",
-    header: "category",
+    header: "Category",
   },
+  // {
+  //   accessorKey: "description",
+  //   header: "Description",
+  // },
   {
     accessorKey: "availableQuantity",
     header: ({ column }) => {

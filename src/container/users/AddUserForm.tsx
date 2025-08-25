@@ -10,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 
 function AddUserForm({ form, setForm, handleSubmit, handleChange }: any) {
   return (
@@ -38,6 +39,27 @@ function AddUserForm({ form, setForm, handleSubmit, handleChange }: any) {
                   onChange={handleChange}
                 />
               </div>
+
+              <div className="formSingleField">
+                <Label className="inputLabel" htmlFor="phone">
+                  Phone Number
+                </Label>
+                <Input
+                  className="inputBox"
+                  type="tel"
+                  name="phone"
+                  id="phone"
+                  maxLength={10}
+                  placeholder="Phone Number"
+                  value={form?.phone || ""}
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/\D/g, "");
+                    if (value.length <= 10) {
+                      setForm({ ...form, phone: value });
+                    }
+                  }}
+                />
+              </div>
             </div>
           </div>
 
@@ -55,20 +77,6 @@ function AddUserForm({ form, setForm, handleSubmit, handleChange }: any) {
                   id="email"
                   placeholder="Email"
                   value={form?.email || ""}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="formSingleField">
-                <Label className="inputLabel" htmlFor="phone">
-                  Phone Number
-                </Label>
-                <Input
-                  className="inputBox"
-                  type="tel"
-                  name="phone"
-                  id="phone"
-                  placeholder="Phone Number"
-                  value={form?.phone || ""}
                   onChange={handleChange}
                 />
               </div>
@@ -96,31 +104,49 @@ function AddUserForm({ form, setForm, handleSubmit, handleChange }: any) {
                 </Select>
               </div>
 
-              {/* Role Checkbox */}
+              {/* Gender Checkbox */}
               <div className="formSingleField flex flex-col gap-2">
-                <Label className="inputLabel">Role</Label>
+                <Label className="inputLabel">Gender</Label>
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-2">
                     <Checkbox
-                      id="role-admin"
-                      checked={form?.role === "admin"}
+                      id="gender-male"
+                      checked={form?.gender === "male"}
                       onCheckedChange={(checked) =>
-                        setForm({ ...form, role: checked ? "admin" : "" })
+                        setForm({ ...form, gender: checked ? "male" : "" })
                       }
                     />
-                    <Label htmlFor="role-admin">Admin</Label>
+                    <Label htmlFor="gender-male">Male</Label>
                   </div>
                   <div className="flex items-center gap-2">
                     <Checkbox
-                      id="role-customer"
-                      checked={form?.role === "customer"}
+                      id="gender-female"
+                      checked={form?.gender === "female"}
                       onCheckedChange={(checked) =>
-                        setForm({ ...form, role: checked ? "customer" : "" })
+                        setForm({ ...form, gender: checked ? "female" : "" })
                       }
                     />
-                    <Label htmlFor="role-customer">Customer</Label>
+                    <Label htmlFor="gender-female">Female</Label>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="formFieldSection">
+            <div className="formDoubleField">
+              {/* Gender Checkbox */}
+              <div className="formSingleField flex flex-col gap-2">
+                <Label className="inputLabel" htmlFor="phone">
+                  Address
+                </Label>
+                <Textarea
+                  name="address"
+                  id="address"
+                  placeholder="Full Address"
+                  value={form?.address || ""}
+                  onChange={handleChange}
+                />
               </div>
             </div>
           </div>
