@@ -20,24 +20,11 @@ import {
 
 export const description = "A line chart with a label";
 
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 700, mobile: 140 },
-  { month: "July", desktop: 214, mobile: 140 },
-  { month: "August", desktop: 74, mobile: 140 },
-  { month: "September", desktop: 825, mobile: 140 },
-  { month: "October", desktop: 568, mobile: 140 },
-  { month: "November", desktop: 774, mobile: 140 },
-  { month: "December", desktop: 1153, mobile: 140 },
-];
+
 
 const chartConfig = {
   desktop: {
-    label: "Desktop",
+    label: "Revenue",
     color: "var(--chart-1)",
   },
   mobile: {
@@ -46,7 +33,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function ChartLineLabel() {
+export function ChartLineLabel({ data }: { data: any[] }) {
   return (
     <Card>
       <CardHeader>
@@ -60,7 +47,7 @@ export function ChartLineLabel() {
         >
           <LineChart
             accessibilityLayer
-            data={chartData}
+            data={data}
             margin={{
               top: 20,
               left: 12,

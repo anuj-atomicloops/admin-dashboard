@@ -5,7 +5,6 @@ const useDashboardHook = () => {
   const orders = useHookstate(globalState.orders).get();
   const now = new Date();
 
-  // 🔹 Date helpers
   const isSameDay = (d1: Date, d2: Date) =>
     d1.getFullYear() === d2.getFullYear() &&
     d1.getMonth() === d2.getMonth() &&
@@ -62,7 +61,7 @@ const useDashboardHook = () => {
   const isLastYear = (date: Date, ref: Date) =>
     date.getFullYear() === ref.getFullYear() - 1;
 
-  // 🔹 Aggregations
+  // -------------------------------------------------------
   const todayRevenue = orders
     .filter((o) => isSameDay(new Date(o.orderDate), now))
     .reduce((acc, o) => acc + o.totalAmount, 0);
@@ -97,6 +96,22 @@ const useDashboardHook = () => {
 
   const totalRevenue = orders.reduce((acc, o) => acc + o.totalAmount, 0);
 
+  //----------- Monthly Revenue (Jan - Dec) --------------------
+  const monthlyRevenue = Array.from({ length: 12 }, (_, monthIdx) => {
+    const monthRevenue = orders
+      .filter(
+        (o) =>
+          new Date(o.orderDate).getFullYear() === now.getFullYear() &&
+          new Date(o.orderDate).getMonth() === monthIdx
+      )
+      .reduce((acc, o) => acc + o.totalAmount, 0);
+
+    return {
+      month: new Date(0, monthIdx).toLocaleString("default", { month: "long" }),
+      desktop: monthRevenue,
+    };
+  });
+
   return {
     todayRevenue,
     yesterdayRevenue,
@@ -107,6 +122,7 @@ const useDashboardHook = () => {
     thisYearRevenue,
     lastYearRevenue,
     totalRevenue,
+    monthlyRevenue,
   };
 };
 

@@ -8,9 +8,9 @@
       "address": "Mumbai, India",
       "gender": "female",
       "status": "active",
-      "ordersCount": 0,
-      "totalSpent": 0,
-      "lastOrderDate": "2025-08-26T05:42:32.179Z",
+      "ordersCount": 1,
+      "totalSpent": 2500,
+      "lastOrderDate": "2025-08-26T10:29:45.619Z",
       "createdAt": "2025-08-20T09:00:00.000Z",
       "lastLogin": "2025-08-24T10:00:00.000Z"
     },
@@ -22,9 +22,9 @@
       "address": "Pune, India",
       "gender": "male",
       "status": "active",
-      "ordersCount": 0,
-      "totalSpent": 0,
-      "lastOrderDate": "2025-08-24T12:30:00.000Z",
+      "ordersCount": 1,
+      "totalSpent": 7500,
+      "lastOrderDate": "2025-08-26T10:29:22.314Z",
       "createdAt": "2025-08-18T08:30:00.000Z",
       "lastLogin": "2025-08-24T12:35:00.000Z"
     },
@@ -50,9 +50,9 @@
       "address": "Bangalore, India",
       "gender": "female",
       "status": "active",
-      "ordersCount": 0,
-      "totalSpent": 0,
-      "lastOrderDate": null,
+      "ordersCount": 1,
+      "totalSpent": 10000,
+      "lastOrderDate": "2025-08-26T10:29:32.236Z",
       "createdAt": "2025-08-25T10:44:39.894Z",
       "lastLogin": null
     },
@@ -64,9 +64,9 @@
       "address": "Hyderabad, India",
       "gender": "male",
       "status": "active",
-      "ordersCount": 1,
-      "totalSpent": 9000,
-      "lastOrderDate": "2025-08-26T07:29:40.765Z",
+      "ordersCount": 3,
+      "totalSpent": 14400,
+      "lastOrderDate": "2025-08-26T10:30:59.771Z",
       "createdAt": "2025-08-22T11:41:42.357Z",
       "lastLogin": null
     },
@@ -78,9 +78,9 @@
       "address": "New York, USA",
       "gender": "male",
       "status": "active",
-      "ordersCount": 1,
-      "totalSpent": 3000,
-      "lastOrderDate": "2025-08-26T07:51:16.413Z",
+      "ordersCount": 3,
+      "totalSpent": 12200,
+      "lastOrderDate": "2025-08-26T10:31:09.827Z",
       "createdAt": "2025-08-22T11:50:35.812Z",
       "lastLogin": null
     },
@@ -97,6 +97,20 @@
       "lastOrderDate": "2025-08-25T18:35:34.472Z",
       "createdAt": "2025-08-23T09:20:00.000Z",
       "lastLogin": null
+    },
+    {
+      "id": "DEN",
+      "name": "Kapil Rajput",
+      "phone": "919111099757",
+      "email": "kapil@gmail.com",
+      "status": "active",
+      "address": "Uttar Pradesh, India",
+      "gender": "male",
+      "ordersCount": 0,
+      "totalSpent": 0,
+      "lastOrderDate": null,
+      "createdAt": "2025-08-26T10:37:14.377Z",
+      "lastLogin": null
     }
   ],
   "products": [
@@ -106,7 +120,7 @@
       "category": "Electronics",
       "description": "Noise-cancelling Bluetooth headphones with 20h battery life",
       "price": 2500,
-      "availableQuantity": 51,
+      "availableQuantity": 50,
       "salesReport": []
     },
     {
@@ -115,7 +129,7 @@
       "category": "Electronics",
       "description": "Fitness tracking smartwatch with heart rate monitor",
       "price": 5000,
-      "availableQuantity": 30,
+      "availableQuantity": 28,
       "salesReport": []
     },
     {
@@ -133,7 +147,7 @@
       "category": "Fashion",
       "description": "Comfortable running sneakers for daily use",
       "price": 3000,
-      "availableQuantity": 0,
+      "availableQuantity": 47,
       "salesReport": []
     },
     {
@@ -151,7 +165,7 @@
       "category": "Books",
       "description": "Self-help book by James Clear",
       "price": 600,
-      "availableQuantity": 80,
+      "availableQuantity": 78,
       "salesReport": []
     },
     {
@@ -160,7 +174,7 @@
       "category": "Home",
       "description": "Modern wooden coffee table",
       "price": 2000,
-      "availableQuantity": 28,
+      "availableQuantity": 24,
       "salesReport": []
     },
     {
@@ -169,7 +183,7 @@
       "category": "Home",
       "description": "Energy-saving desk lamp",
       "price": 1200,
-      "availableQuantity": 46,
+      "availableQuantity": 44,
       "salesReport": []
     },
     {
@@ -178,7 +192,7 @@
       "category": "Sports",
       "description": "Professional size 5 football",
       "price": 1500,
-      "availableQuantity": 60,
+      "availableQuantity": 55,
       "salesReport": []
     },
     {
@@ -201,7 +215,7 @@
       "qty": 3,
       "totalAmount": 9000,
       "status": "completed",
-      "orderDate": "2025-08-18T07:29:40.708Z"
+      "orderDate": "2025-02-18T07:29:40.708Z"
     },
     {
       "id": "UsH",
@@ -212,7 +226,7 @@
       "qty": 2,
       "totalAmount": 3000,
       "status": "completed",
-      "orderDate": "2025-08-26T07:51:16.278Z"
+      "orderDate": "2025-04-26T07:51:16.278Z"
     },
     {
       "id": "Mcj",
@@ -223,7 +237,84 @@
       "qty": 4,
       "totalAmount": 4800,
       "status": "completed",
-      "orderDate": "2025-08-26T07:53:28.289Z"
+      "orderDate": "2025-03-26T07:53:28.289Z"
+    },
+    {
+      "id": "Mgc",
+      "userId": "us06",
+      "userName": "Tony Stark",
+      "productId": "prod07",
+      "productName": "Coffee Table",
+      "qty": 4,
+      "totalAmount": 8000,
+      "status": "completed",
+      "orderDate": "2025-04-26T10:29:11.808Z"
+    },
+    {
+      "id": "6DC",
+      "userId": "us02",
+      "userName": "Rohan Verma",
+      "productId": "prod09",
+      "productName": "Football",
+      "qty": 5,
+      "totalAmount": 7500,
+      "status": "completed",
+      "orderDate": "2025-05-26T10:29:22.235Z"
+    },
+    {
+      "id": "CvU",
+      "userId": "us04",
+      "userName": "Anushka Rao",
+      "productId": "prod02",
+      "productName": "Smartwatch",
+      "qty": 2,
+      "totalAmount": 10000,
+      "status": "completed",
+      "orderDate": "2025-06-26T10:29:32.149Z"
+    },
+    {
+      "id": "o3o",
+      "userId": "us01",
+      "userName": "Priya Sharma",
+      "productId": "prod01",
+      "productName": "Wireless Headphones",
+      "qty": 1,
+      "totalAmount": 2500,
+      "status": "completed",
+      "orderDate": "2025-01-26T10:29:45.545Z"
+    },
+    {
+      "id": "kDS",
+      "userId": "us05",
+      "userName": "Anuj Kumar",
+      "productId": "prod08",
+      "productName": "LED Lamp",
+      "qty": 2,
+      "totalAmount": 2400,
+      "status": "completed",
+      "orderDate": "2025-01-26T10:29:52.673Z"
+    },
+    {
+      "id": "9r2",
+      "userId": "us05",
+      "userName": "Anuj Kumar",
+      "productId": "prod04",
+      "productName": "Sneakers",
+      "qty": 1,
+      "totalAmount": 3000,
+      "status": "completed",
+      "orderDate": "2025-02-26T10:30:59.683Z"
+    },
+    {
+      "id": "rIm",
+      "userId": "us06",
+      "userName": "Tony Stark",
+      "productId": "prod06",
+      "productName": "Atomic Habits",
+      "qty": 2,
+      "totalAmount": 1200,
+      "status": "completed",
+      "orderDate": "2025-03-26T10:31:09.759Z"
     }
   ]
 }

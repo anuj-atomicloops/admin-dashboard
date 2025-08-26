@@ -67,7 +67,7 @@ export function ChartBarDefault({ data: users }: any) {
   const isUp = trend >= 0;
 
   return (
-    <Card  className="flex flex-col">
+    <Card  className="flex flex-col shadow-none border-0">
       <CardHeader>
         <CardTitle>Users Joined</CardTitle>
         <CardDescription>Last 7 days</CardDescription>
