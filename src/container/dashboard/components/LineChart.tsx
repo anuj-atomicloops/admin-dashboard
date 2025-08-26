@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { TrendingUp } from "lucide-react"
-import { CartesianGrid, Line, LineChart, XAxis } from "recharts"
+import { TrendingUp } from "lucide-react";
+import { CartesianGrid, LabelList, Line, LineChart, XAxis } from "recharts";
 
 import {
   Card,
@@ -10,15 +10,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
-  type ChartConfig,
+  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
+} from "@/components/ui/chart";
 
-export const description = "A multiple line chart"
+export const description = "A line chart with a label";
 
 const chartData = [
   { month: "January", desktop: 186, mobile: 80 },
@@ -26,8 +26,14 @@ const chartData = [
   { month: "March", desktop: 237, mobile: 120 },
   { month: "April", desktop: 73, mobile: 190 },
   { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
-]
+  { month: "June", desktop: 700, mobile: 140 },
+  { month: "July", desktop: 214, mobile: 140 },
+  { month: "August", desktop: 74, mobile: 140 },
+  { month: "September", desktop: 825, mobile: 140 },
+  { month: "October", desktop: 568, mobile: 140 },
+  { month: "November", desktop: 774, mobile: 140 },
+  { month: "December", desktop: 1153, mobile: 140 },
+];
 
 const chartConfig = {
   desktop: {
@@ -38,32 +44,28 @@ const chartConfig = {
     label: "Mobile",
     color: "var(--chart-2)",
   },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
-export function ChartLineMultiple() {
+export function ChartLineLabel() {
   return (
-    <Card className="">
+    <Card>
       <CardHeader>
-        <CardTitle>Line Chart - Multiple</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Total Revenue Chart</CardTitle>
+        <CardDescription>January - December 2025</CardDescription>
       </CardHeader>
       <CardContent>
-        {/* Fixed height container */}
         <ChartContainer
+          className="h-[190px] w-full overflow-hidden"
           config={chartConfig}
-          className="h-[195px] w-full overflow-hidden"
         >
           <LineChart
             accessibilityLayer
             data={chartData}
             margin={{
+              top: 20,
               left: 12,
               right: 12,
-              top: 20,
-              bottom: 20,
             }}
-            width={600} // ensures it fits inside
-            height={400} // enforce fixed height
           >
             <CartesianGrid vertical={false} />
             <XAxis
@@ -73,36 +75,40 @@ export function ChartLineMultiple() {
               tickMargin={8}
               tickFormatter={(value) => value.slice(0, 3)}
             />
-            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent indicator="line" />}
+            />
             <Line
               dataKey="desktop"
-              type="monotone"
+              type="natural"
               stroke="var(--color-desktop)"
               strokeWidth={2}
-              dot={false}
-            />
-            <Line
-              dataKey="mobile"
-              type="monotone"
-              stroke="var(--color-mobile)"
-              strokeWidth={2}
-              dot={false}
-            />
+              dot={{
+                fill: "var(--color-desktop)",
+              }}
+              activeDot={{
+                r: 6,
+              }}
+            >
+              <LabelList
+                position="top"
+                offset={12}
+                className="fill-foreground"
+                fontSize={12}
+              />
+            </Line>
           </LineChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter>
-        <div className="flex w-full items-start gap-2 text-sm">
-          <div className="grid gap-2">
-            <div className="flex items-center gap-2 leading-none font-medium">
-              Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-            </div>
-            <div className="text-muted-foreground flex items-center gap-2 leading-none">
-              Showing total visitors for the last 6 months
-            </div>
-          </div>
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="flex gap-2 leading-none font-medium">
+          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+        </div>
+        <div className="text-muted-foreground leading-none">
+          Showing total visitors for the last 12 months
         </div>
       </CardFooter>
     </Card>
-  )
+  );
 }

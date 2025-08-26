@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import AddUserForm from "@/container/users/AddUserForm";
 import AddProductsrForm from "@/container/products/AddProductsrForm";
+import AddOrdersForm from "@/container/orders/AddOrdersForm";
 
 export function FormDialog({
   title,
@@ -19,6 +20,8 @@ export function FormDialog({
   open,
   setOpen,
   categories,
+  users,
+  products,
 }: any) {
   const handleFormSubmit = async () => {
     const success = await handleSubmit();
@@ -49,7 +52,7 @@ export function FormDialog({
             handleSubmit={handleFormSubmit}
             handleChange={handleChange}
           />
-        ) : (
+        ) : title === "products" ? (
           <AddProductsrForm
             form={form}
             categories={categories}
@@ -57,6 +60,17 @@ export function FormDialog({
             handleSubmit={handleFormSubmit}
             handleChange={handleChange}
           />
+        ) : title === "orders" ? (
+          <AddOrdersForm
+            form={form}
+            users={users}
+            products={products}
+            setForm={setForm}
+            handleSubmit={handleFormSubmit}
+            handleChange={handleChange}
+          />
+        ) : (
+          <h1>Add a form</h1>
         )}
       </DialogContent>
     </Dialog>

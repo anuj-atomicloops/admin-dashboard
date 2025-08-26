@@ -27,13 +27,14 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { FormDialog } from "@/container/dashboard/components/FormDialog";
+import { FormDialog } from "@/layouts/FormDialog";
 
 export function DataTable({
   searchBy = "email",
   dialogProps,
   columns,
   data,
+  
 }: any) {
   console.log(columns, "data table");
   const [sorting, setSorting] = React.useState<SortingState>([]);

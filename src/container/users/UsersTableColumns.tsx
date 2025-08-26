@@ -76,6 +76,9 @@ export const UsersTableColumns: ColumnDef<any>[] = [
     {
     accessorKey: "gender",
     header: "Gender",
+  },{
+    accessorKey: "totalSpent",
+    header: "₹ Total Spent",
   },
   {
     accessorKey: "ordersCount",

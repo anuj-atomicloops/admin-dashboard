@@ -10,27 +10,30 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
 
-import useProductsHook from "./useProductsHook";
-import { ProductsTableColumns } from "./ProductsTableColumns";
+import { OrdersTableColumns } from "./OrdersTableColumns";
+import useOrdersHook from "./useOrdersHook";
 
-export default function ProductsContainer() {
+export default function OrdersContainer() {
   const {
     form,
     handleChange,
     setForm,
+    resetForm,
     handleSubmit,
+    orders,
+    users,
     products,
-    handleDelete,
+    statuses,
     dialogOpen,
     setDialogOpen,
-    categories
-  } = useProductsHook();
+    handleDelete,
+  } = useOrdersHook();
 
   const actionColumn = {
     id: "actions",
     header: "Actions",
     cell: ({ row }: any) => {
-      const product = row.original;
+      const order = row.original;
       return (
         <DropdownMenu>
           <DropdownMenuTrigger>
@@ -40,21 +43,25 @@ export default function ProductsContainer() {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(product.id)}
+              onClick={() => navigator.clipboard.writeText(order.id)}
             >
-              Copy Product id
+              Copy order id
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => {
-                setForm({ ...product });
+                setForm({ ...order });
                 setDialogOpen(true);
               }}
             >
-              Edit product details
+              Edit order details
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => handleDelete(product.id)}>
-              Delete Product
+            <DropdownMenuItem
+              onClick={() => {
+                handleDelete(order.id);
+              }}
+            >
+              Delete order
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -62,26 +69,27 @@ export default function ProductsContainer() {
     },
   };
 
-  const finalColumns = [...ProductsTableColumns, actionColumn];
+  const finalColumns = [...OrdersTableColumns, actionColumn];
 
   return (
     <div className=" border-red-500 h-full">
-      <h1 className="text-2xl font-bold">Products management</h1>
+      <h1 className="text-2xl font-bold">Orders management</h1>
 
       <DataTable
         columns={finalColumns}
-        data={products.get()}
-        searchBy={"name"}
+        data={orders.get()}
+        searchBy={"userName"}
         // ----form dialog props-----------
         dialogProps={{
-          title: "products",
+          title: "orders",
           form,
           setForm,
           handleSubmit,
           handleChange,
           open: dialogOpen,
           setOpen: setDialogOpen,
-          categories
+          users: users.get(),
+          products: products.get(),
         }}
       />
     </div>

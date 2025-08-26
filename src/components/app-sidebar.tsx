@@ -6,6 +6,7 @@ import {
   Command,
   Frame,
   GalleryVerticalEnd,
+  ListOrdered,
   Map,
   PieChart,
   Settings2,
@@ -83,7 +84,7 @@ const data = {
       icon: Bot,
       items: [
         { title: "All Products", url: "/products" },
-        { title: "Active Products", url: "/products/active" },
+        // { title: "All Orders", url: "/orders" },
       ],
     },
    
@@ -101,11 +102,11 @@ const data = {
       url: "/dashboard",
       icon: PieChart,
     },
-    // {
-    //   name: "Travel",
-    //   url: "#",
-    //   icon: Map,
-    // },
+    {
+      name: "Orders",
+      url: "/orders",
+      icon: ListOrdered,
+    },
   ],
 };
 

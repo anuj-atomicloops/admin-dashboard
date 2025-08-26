@@ -8,9 +8,9 @@
       "address": "Mumbai, India",
       "gender": "female",
       "status": "active",
-      "ordersCount": 2,
-      "totalSpent": 3500,
-      "lastOrderDate": "2025-08-23T15:10:00.000Z",
+      "ordersCount": 0,
+      "totalSpent": 0,
+      "lastOrderDate": "2025-08-26T05:42:32.179Z",
       "createdAt": "2025-08-20T09:00:00.000Z",
       "lastLogin": "2025-08-24T10:00:00.000Z"
     },
@@ -22,8 +22,8 @@
       "address": "Pune, India",
       "gender": "male",
       "status": "active",
-      "ordersCount": 1,
-      "totalSpent": 1500,
+      "ordersCount": 0,
+      "totalSpent": 0,
       "lastOrderDate": "2025-08-24T12:30:00.000Z",
       "createdAt": "2025-08-18T08:30:00.000Z",
       "lastLogin": "2025-08-24T12:35:00.000Z"
@@ -36,9 +36,9 @@
       "address": "Delhi, India",
       "gender": "female",
       "status": "active",
-      "ordersCount": 0,
-      "totalSpent": 0,
-      "lastOrderDate": null,
+      "ordersCount": 1,
+      "totalSpent": 4800,
+      "lastOrderDate": "2025-08-26T07:53:28.378Z",
       "createdAt": "2025-08-24T10:18:30.190Z",
       "lastLogin": null
     },
@@ -64,9 +64,9 @@
       "address": "Hyderabad, India",
       "gender": "male",
       "status": "active",
-      "ordersCount": 0,
-      "totalSpent": 0,
-      "lastOrderDate": null,
+      "ordersCount": 1,
+      "totalSpent": 9000,
+      "lastOrderDate": "2025-08-26T07:29:40.765Z",
       "createdAt": "2025-08-22T11:41:42.357Z",
       "lastLogin": null
     },
@@ -78,9 +78,9 @@
       "address": "New York, USA",
       "gender": "male",
       "status": "active",
-      "ordersCount": 0,
-      "totalSpent": 0,
-      "lastOrderDate": null,
+      "ordersCount": 1,
+      "totalSpent": 3000,
+      "lastOrderDate": "2025-08-26T07:51:16.413Z",
       "createdAt": "2025-08-22T11:50:35.812Z",
       "lastLogin": null
     },
@@ -94,7 +94,7 @@
       "status": "active",
       "ordersCount": 0,
       "totalSpent": 0,
-      "lastOrderDate": null,
+      "lastOrderDate": "2025-08-25T18:35:34.472Z",
       "createdAt": "2025-08-23T09:20:00.000Z",
       "lastLogin": null
     }
@@ -106,7 +106,7 @@
       "category": "Electronics",
       "description": "Noise-cancelling Bluetooth headphones with 20h battery life",
       "price": 2500,
-      "availableQuantity": 50,
+      "availableQuantity": 51,
       "salesReport": []
     },
     {
@@ -124,7 +124,7 @@
       "category": "Fashion",
       "description": "Stylish black leather jacket for winter",
       "price": 7500,
-      "availableQuantity": 20,
+      "availableQuantity": 21,
       "salesReport": []
     },
     {
@@ -133,7 +133,7 @@
       "category": "Fashion",
       "description": "Comfortable running sneakers for daily use",
       "price": 3000,
-      "availableQuantity": 40,
+      "availableQuantity": 0,
       "salesReport": []
     },
     {
@@ -142,7 +142,7 @@
       "category": "Books",
       "description": "Inspirational novel by Paulo Coelho",
       "price": 500,
-      "availableQuantity": 100,
+      "availableQuantity": 101,
       "salesReport": []
     },
     {
@@ -160,7 +160,7 @@
       "category": "Home",
       "description": "Modern wooden coffee table",
       "price": 2000,
-      "availableQuantity": 25,
+      "availableQuantity": 28,
       "salesReport": []
     },
     {
@@ -169,7 +169,7 @@
       "category": "Home",
       "description": "Energy-saving desk lamp",
       "price": 1200,
-      "availableQuantity": 50,
+      "availableQuantity": 46,
       "salesReport": []
     },
     {
@@ -189,6 +189,41 @@
       "price": 800,
       "availableQuantity": 100,
       "salesReport": []
+    }
+  ],
+  "orders": [
+    {
+      "id": "i8c",
+      "userId": "us05",
+      "userName": "Anuj Kumar",
+      "productId": "prod04",
+      "productName": "Sneakers",
+      "qty": 3,
+      "totalAmount": 9000,
+      "status": "completed",
+      "orderDate": "2025-08-18T07:29:40.708Z"
+    },
+    {
+      "id": "UsH",
+      "userId": "us06",
+      "userName": "Tony Stark",
+      "productId": "prod09",
+      "productName": "Football",
+      "qty": 2,
+      "totalAmount": 3000,
+      "status": "completed",
+      "orderDate": "2025-08-26T07:51:16.278Z"
+    },
+    {
+      "id": "Mcj",
+      "userId": "us03",
+      "userName": "Natasha Singh",
+      "productId": "prod08",
+      "productName": "LED Lamp",
+      "qty": 4,
+      "totalAmount": 4800,
+      "status": "completed",
+      "orderDate": "2025-08-26T07:53:28.289Z"
     }
   ]
 }

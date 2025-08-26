@@ -3,11 +3,35 @@ import { ChartBarDefault } from "./components/BarChart";
 
 import { globalState } from "@/store/globalState";
 import { ChartPieLegend } from "./components/PieChart";
-import { ChartLineMultiple } from "./components/LineChart";
+import { ChartLineLabel, ChartLineMultiple } from "./components/LineChart";
+import useDashboardHook from "./hook";
 
 function DashboardContainer() {
   const users = useHookstate(globalState?.users);
   const products = useHookstate(globalState?.products);
+
+  const {
+    todayRevenue,
+    yesterdayRevenue,
+    thisWeekRevenue,
+    lastWeekRevenue,
+    thisMonthRevenue,
+    lastMonthRevenue,
+    thisYearRevenue,
+    lastYearRevenue,
+    totalRevenue,
+  } = useDashboardHook();
+
+  console.log("👉 Today Revenue:", todayRevenue);
+console.log("👉 Yesterday Revenue:", yesterdayRevenue);
+console.log("👉 This Week Revenue:", thisWeekRevenue);
+console.log("👉 Last Week Revenue:", lastWeekRevenue);
+console.log("👉 This Month Revenue:", thisMonthRevenue);
+console.log("👉 Last Month Revenue:", lastMonthRevenue);
+console.log("👉 This Year Revenue:", thisYearRevenue);
+console.log("👉 Last Year Revenue:", lastYearRevenue);
+console.log("👉 Total Revenue:", totalRevenue);
+
 
   return (
     <div className="flex flex-1 flex-col gap-6 p-4 pt-0">
@@ -42,7 +66,7 @@ function DashboardContainer() {
 
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         <div className="bg-muted/50 rounded-xl shadow-md lg:col-span-2">
-          <ChartLineMultiple />
+          <ChartLineLabel />
         </div>
         <div className="bg-muted/50 rounded-xl shadow-md"></div>
       </div>
