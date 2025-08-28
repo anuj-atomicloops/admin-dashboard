@@ -5,6 +5,7 @@ import { ChartPieLegend } from "./components/PieChart";
 import { ChartLineLabel } from "./components/LineChart";
 import useDashboardHook from "./hook";
 import { Card, CardContent } from "@/components/ui/card";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 function DashboardContainer() {
   const users = useHookstate(globalState?.users);
@@ -38,7 +39,11 @@ function DashboardContainer() {
 
   return (
     <div className="flex flex-1 flex-col gap-6 pt-0">
-      <h3 className="text-xl font-bold">Admin Dashboard</h3>
+      <div className="flex justify-between">
+      
+        <h3 className="text-xl font-bold">Admin Dashboard</h3>
+        <ThemeToggle />
+      </div>
 
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
         {/* ------------------- Users Bar Chart -------------------*/}
@@ -81,7 +86,7 @@ function DashboardContainer() {
 
         {/* -------------------yearly revenue line chart--------------- */}
         <div className="bg-muted/50 rounded-xl shadow-md lg:col-span-2">
-          <ChartLineLabel data={monthlyRevenue}/>
+          <ChartLineLabel data={monthlyRevenue} />
         </div>
       </div>
     </div>

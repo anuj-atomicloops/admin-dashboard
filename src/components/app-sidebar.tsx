@@ -56,8 +56,8 @@ const data = {
       icon: Bot,
       items: [
         { title: "All Users", url: "/users" },
-        { title: "Active Users", url: "/users/active" },
-        { title: "Inactive Users", url: "/users/inactive" },
+        // { title: "Active Users", url: "/users/active" },
+        // { title: "Inactive Users", url: "/users/inactive" },
       ],
     },
     // {
