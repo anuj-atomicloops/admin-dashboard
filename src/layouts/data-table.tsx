@@ -63,7 +63,6 @@ export function DataTable({
       rowSelection,
     },
   });
-
   return (
     <div>
       <div className="flex justify-between py-4  border-red-500">

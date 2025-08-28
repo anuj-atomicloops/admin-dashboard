@@ -11,12 +11,17 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
-import { useState } from "react";
 
 export default function UsersContainer() {
-  const { form, handleChange, setForm, handleSubmit, users, handleDelete,dialogOpen, setDialogOpen } =
-    useUserHook();
-  
+  const {
+    form,
+    handleEdit,
+    processSubmit,
+    users,
+    handleDelete,
+    dialogOpen,
+    setDialogOpen,
+  } = useUserHook();
 
   const actionColumn = {
     id: "actions",
@@ -43,7 +48,7 @@ export default function UsersContainer() {
                   ? user.phone.slice(2) //---------> remove "91" prefix
                   : user.phone;
 
-                setForm({ ...user, phone: formattedPhone });
+                handleEdit({ ...user, phone: formattedPhone });
                 setDialogOpen(true);
               }}
             >
@@ -72,11 +77,10 @@ export default function UsersContainer() {
         dialogProps={{
           title: "user",
           form,
-          setForm,
-          handleSubmit,
-          handleChange,
-          open: dialogOpen,
-          setOpen: setDialogOpen,
+          handleEdit,
+          processSubmit,
+          dialogOpen,
+          setDialogOpen,
         }}
       />
     </div>

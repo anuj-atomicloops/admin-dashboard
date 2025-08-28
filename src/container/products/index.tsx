@@ -16,14 +16,13 @@ import { ProductsTableColumns } from "./ProductsTableColumns";
 export default function ProductsContainer() {
   const {
     form,
-    handleChange,
-    setForm,
-    handleSubmit,
-    products,
+    processSubmit,
     handleDelete,
+    handleEdit,
+    products,
     dialogOpen,
     setDialogOpen,
-    categories
+    categories,
   } = useProductsHook();
 
   const actionColumn = {
@@ -47,7 +46,7 @@ export default function ProductsContainer() {
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => {
-                setForm({ ...product });
+                handleEdit({ ...product });
                 setDialogOpen(true);
               }}
             >
@@ -76,12 +75,13 @@ export default function ProductsContainer() {
         dialogProps={{
           title: "products",
           form,
-          setForm,
-          handleSubmit,
-          handleChange,
-          open: dialogOpen,
-          setOpen: setDialogOpen,
-          categories
+          processSubmit,
+          handleDelete,
+          handleEdit,
+          products,
+          dialogOpen,
+          setDialogOpen,
+          categories,
         }}
       />
     </div>

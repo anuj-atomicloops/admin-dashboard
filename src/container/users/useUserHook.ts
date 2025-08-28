@@ -1,103 +1,84 @@
-import useForm from "@/hooks/useForm";
-
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useHookstate } from "@hookstate/core";
+import { toast } from "sonner";
+import { z } from "zod";
 import { globalState } from "@/store/globalState";
 import api from "@/lib/api";
-import { toast } from "sonner";
 import { generateId } from "@/lib/utils";
-import { useState } from "react";
+
+const UserFormSchema = z.object({
+  id: z.string().optional(),
+  name: z
+    .string()
+    .min(3, { message: "Name must be at least 3 characters long." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  phone: z
+    .string()
+    .regex(/^\d{10}$/, { message: "Phone number must be exactly 10 digits." }),
+  gender: z.string().min(1, { message: "Please select a gender" }),
+  status: z.string().min(1, { message: "Please select a status" }),
+
+  address: z
+    .string()
+    .min(5, { message: "Address must be at least 5 characters long." }),
+  ordersCount: z.number().optional(),
+  totalSpent: z.number().optional(),
+  lastOrderDate: z.string().nullable().optional(),
+  createdAt: z.string().optional(),
+  lastLogin: z.string().nullable().optional(),
+});
+
 
 const useUserHook = () => {
-  const { form, handleChange, setForm, resetForm } = useForm();
   const [dialogOpen, setDialogOpen] = useState(false);
   const users = useHookstate(globalState.users);
 
-  // --- Validation helper ---
-  const validateForm = () => {
-    // ----------------Name at least 3 chars
-    if (!form.name || form.name.trim().length < 3) {
-      toast.error("Name must be at least 3 characters long");
-      return null;
-    }
+  // -----------------------------------------------------
+  const form = useForm<z.infer<typeof UserFormSchema>>({
+    resolver: zodResolver(UserFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      address: "",
+      gender: "",
+      status: "",
+    },
+  });
 
-    // ------------Email format check
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!form.email || !emailRegex.test(form.email)) {
-      toast.error("Please enter a valid email address");
-      return null;
-    }
-
-    let phone = form.phone || "";
-
-    // -------- exactly 10 digits
-    const phoneRegex = /^\d{10}$/;
-    if (!phoneRegex.test(phone)) {
-      toast.error("Phone number must be exactly 10 digits");
-      return null;
-    }
-
-    // ---------------add 91 before saving
-    phone = "91" + phone;
-
-    if (!form.gender) {
-      toast.error("Please select gender (Male or Female)");
-      return null;
-    }
-
-    if (!form.status) {
-      toast.error("Please select a status (Active or Banned)");
-      return null;
-    }
-
-    // ------------ at least 10 chars
-    if (!form.address || form.address.trim().length < 10) {
-      toast.error("Address must be at least 10 characters long");
-      return null;
-    }
-
-    return {
-      ...form,
-      phone,
-    };
-  };
-
-  const handleSubmit = async () => {
-    const validated = validateForm();
-    if (!validated) return false;
-
-    const isEdit = !!validated.id;
-
-    //--------- 91 prefix only once
-    let phoneWithPrefix = validated.phone.startsWith("91")
-      ? validated.phone
-      : "91" + validated.phone;
-
+  //  --------------------handle submit----------------------
+  const processSubmit = async (data: z.infer<typeof UserFormSchema>) => {
+    const isEdit = !!data.id;
+  
     const payload = {
-      ...validated,
-      phone: phoneWithPrefix,
-      ordersCount: validated.ordersCount ?? 0,
-      totalSpent: validated.totalSpent ?? 0,
-      lastOrderDate: validated.lastOrderDate || null,
-      createdAt: isEdit ? validated.createdAt : new Date().toISOString(),
-      lastLogin: validated.lastLogin || null,
+      ...data,
+      phone: `91${data.phone}`,
+      ordersCount: data.ordersCount ?? 0,
+      totalSpent: data.totalSpent ?? 0,
+      lastOrderDate: data.lastOrderDate || null,
+      createdAt: isEdit ? data.createdAt : new Date().toISOString(),
+      lastLogin: data.lastLogin || null,
     };
 
     try {
       let savedUser;
       if (isEdit) {
-        savedUser = await api.put(`/users/${validated.id}`, payload);
-        users.set((prev) =>
-          prev.map((u: any) => (u.id === validated.id ? savedUser : u))
+        savedUser = await api.put(`/users/${data.id}`, payload);
+        users.set((prev: any) =>
+          prev.map((u: any) => (u.id === data.id ? savedUser : u))
         );
         toast.success("User updated successfully");
       } else {
         payload.id = generateId();
         savedUser = await api.post("/users", payload);
-        users.set((prev) => [savedUser, ...prev]);
+        users.set((prev: any) => [savedUser, ...prev]);
         toast.success("User added successfully");
       }
-
-      resetForm();
+      
+      form.reset();
+      setDialogOpen(false);
       return true;
     } catch (err) {
       console.error("Error submitting form:", err);
@@ -117,13 +98,25 @@ const useUserHook = () => {
     }
   };
 
+  //  ---------------handle edit----------------------
+  const handleEdit = (user: any) => {
+    // --------Remove the '91' prefix for the form field----------
+    const phoneWithoutPrefix = user.phone?.startsWith("91")
+      ? user.phone.slice(2)
+      : user.phone;
+
+    form.reset({
+      ...user,
+      phone: phoneWithoutPrefix,
+    });
+    setDialogOpen(true);
+  };
+
   return {
     form,
+    processSubmit,
     handleDelete,
-    handleChange,
-    setForm,
-    resetForm,
-    handleSubmit,
+    handleEdit,
     users,
     dialogOpen,
     setDialogOpen,

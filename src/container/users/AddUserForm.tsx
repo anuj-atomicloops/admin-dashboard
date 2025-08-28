@@ -1,8 +1,11 @@
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { FormStyledContainer } from "./styles";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import {
   Select,
   SelectContent,
@@ -10,153 +13,151 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { FormStyledContainer } from "./styles";
 
-function AddUserForm({ form, setForm, handleSubmit, handleChange }: any) {
+function AddUserForm({ form, processSubmit }: any) {
   return (
     <FormStyledContainer>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSubmit();
-        }}
-      >
-        <div className="formSection space-y-6">
-          {/* ID + Name */}
-          <div className="formFieldSection">
-            <div className="formDoubleField">
-              <div className="formSingleField">
-                <Label className="inputLabel" htmlFor="name">
-                  Name
-                </Label>
-                <Input
-                  className="inputBox"
-                  type="text"
-                  name="name"
-                  id="name"
-                  placeholder="Name"
-                  value={form?.name || ""}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className="formSingleField">
-                <Label className="inputLabel" htmlFor="phone">
-                  Phone Number
-                </Label>
-                <Input
-                  className="inputBox"
-                  type="tel"
-                  name="phone"
-                  id="phone"
-                  maxLength={10}
-                  placeholder="Phone Number"
-                  value={form?.phone || ""}
-                  onChange={(e) => {
-                    const value = e.target.value.replace(/\D/g, "");
-                    if (value.length <= 10) {
-                      setForm({ ...form, phone: value });
-                    }
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Email + Phone */}
-          <div className="formFieldSection">
-            <div className="formDoubleField">
-              <div className="formSingleField">
-                <Label className="inputLabel" htmlFor="email">
-                  Email
-                </Label>
-                <Input
-                  className="inputBox"
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="Email"
-                  value={form?.email || ""}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Status and role */}
-          <div className="formFieldSection">
-            <div className="formDoubleField">
-              <div className="formSingleField">
-                <Label className="inputLabel" htmlFor="status">
-                  Status
-                </Label>
-                <Select
-                  value={form?.status || ""}
-                  onValueChange={(val) => setForm({ ...form, status: val })}
-                >
-                  <SelectTrigger className="inputBox" id="status">
-                    <SelectValue placeholder="Select status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="active">Active</SelectItem>
-                    <SelectItem value="banned">Banned</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Gender Checkbox */}
-              <div className="formSingleField flex flex-col gap-2">
-                <Label className="inputLabel">Gender</Label>
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="gender-male"
-                      checked={form?.gender === "male"}
-                      onCheckedChange={(checked) =>
-                        setForm({ ...form, gender: checked ? "male" : "" })
-                      }
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(processSubmit)}>
+          <div className="formDoubleField">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem className="formSingleField">
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem className="formSingleField">
+                  <FormLabel>Phone Number</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="tel"
+                      maxLength={10}
+                      placeholder="10-digit phone number"
+                      {...field}
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/\D/g, "");
+                        field.onChange(value);
+                      }}
                     />
-                    <Label htmlFor="gender-male">Male</Label>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="gender-female"
-                      checked={form?.gender === "female"}
-                      onCheckedChange={(checked) =>
-                        setForm({ ...form, gender: checked ? "female" : "" })
-                      }
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="formDoubleField">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem className="formSingleField">
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder="user@example.com"
+                      {...field}
                     />
-                    <Label htmlFor="gender-female">Female</Label>
-                  </div>
-                </div>
-              </div>
-            </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
 
-          <div className="formFieldSection">
-            <div className="formDoubleField">
-              {/* Gender Checkbox */}
-              <div className="formSingleField flex flex-col gap-2">
-                <Label className="inputLabel" htmlFor="phone">
-                  Address
-                </Label>
-                <Textarea
-                  name="address"
-                  id="address"
-                  placeholder="Full Address"
-                  value={form?.address || ""}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
+          <div className="formDoubleField">
+            <FormField
+              control={form.control}
+              name="status"
+              render={({ field }) => (
+                <FormItem className="formSingleField">
+                  <FormLabel>Status</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a status" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="active">Active</SelectItem>
+                      <SelectItem value="banned">Banned</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="gender"
+              render={({ field }) => (
+                <FormItem className="formSingleField space-y-3">
+                  <FormLabel>Gender</FormLabel>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex items-center space-x-4"
+                    >
+                      <FormItem className="flex items-center space-x-2 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="male" />
+                        </FormControl>
+                        <FormLabel className="font-normal">Male</FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-2 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="female" />
+                        </FormControl>
+                        <FormLabel className="font-normal">Female</FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
 
-          {/* Submit */}
-          <Button type="submit" className="mt-4">
-            Submit
-          </Button>
-        </div>
-      </form>
+          <div className="formDoubleField">
+            <FormField
+              control={form.control}
+              name="address"
+              render={({ field }) => (
+                <FormItem className="formSingleField">
+                  <FormLabel>Address</FormLabel>
+                  <FormControl>
+                    <Textarea placeholder="Enter full address" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <Button type="submit">Submit</Button>
+        </form>
+      </Form>
     </FormStyledContainer>
   );
 }

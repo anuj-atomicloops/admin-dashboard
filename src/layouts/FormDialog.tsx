@@ -10,26 +10,24 @@ import { Button } from "@/components/ui/button";
 import AddUserForm from "@/container/users/AddUserForm";
 import AddProductsrForm from "@/container/products/AddProductsrForm";
 import AddOrdersForm from "@/container/orders/AddOrdersForm";
+import useOrdersHook from "@/container/orders/useOrdersHook";
 
 export function FormDialog({
   title,
   form,
-  setForm,
-  handleSubmit,
-  handleChange,
-  open,
-  setOpen,
+  processSubmit,
+  dialogOpen,
+  setDialogOpen,
+
+  // products
   categories,
+  // orders
+  statuses,
   users,
   products,
 }: any) {
-  const handleFormSubmit = async () => {
-    const success = await handleSubmit();
-    if (success) setOpen(false);
-  };
-
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>
         <Button variant="default">Add new {title}</Button>
       </DialogTrigger>
@@ -46,28 +44,20 @@ export function FormDialog({
         </DialogHeader>
 
         {title === "user" ? (
-          <AddUserForm
-            form={form}
-            setForm={setForm}
-            handleSubmit={handleFormSubmit}
-            handleChange={handleChange}
-          />
+          <AddUserForm form={form} processSubmit={processSubmit} />
         ) : title === "products" ? (
           <AddProductsrForm
             form={form}
             categories={categories}
-            setForm={setForm}
-            handleSubmit={handleFormSubmit}
-            handleChange={handleChange}
+            processSubmit={processSubmit}
           />
         ) : title === "orders" ? (
           <AddOrdersForm
             form={form}
             users={users}
             products={products}
-            setForm={setForm}
-            handleSubmit={handleFormSubmit}
-            handleChange={handleChange}
+            processSubmit={processSubmit}
+            statuses={statuses}
           />
         ) : (
           <h1>Add a form</h1>

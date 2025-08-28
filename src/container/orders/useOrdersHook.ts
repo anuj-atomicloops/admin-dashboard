@@ -1,87 +1,73 @@
-import useForm from "@/hooks/useForm";
 import { useHookstate } from "@hookstate/core";
 import { globalState } from "@/store/globalState";
 import api from "@/lib/api";
 import { toast } from "sonner";
 import { generateId } from "@/lib/utils";
 import { useState } from "react";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
+// ---------------- Schema ----------------
+const OrderFormSchema = z.object({
+  id: z.string().optional(),
+  userId: z.string().min(1, "Please select a user"),
+  productId: z.string().min(1, "Please select a product"),
+  qty: z
+    .number({ invalid_type_error: "Quantity is required" })
+    .min(1, "Quantity must be at least 1")
+    .max(5, "Maximum allowed quantity is 5"),
+  status: z.enum(["completed", "pending", "shipped", "cancelled"]).optional(),
+});
+
+export type OrderFormType = z.infer<typeof OrderFormSchema>;
+
+// ---------------- Hook ----------------
 const useOrdersHook = () => {
-  const { form, handleChange, setForm, resetForm }: any = useForm();
+  const form = useForm<OrderFormType>({
+    resolver: zodResolver(OrderFormSchema),
+    defaultValues: {
+      userId: "",
+      productId: "",
+      qty: 1,
+      status: "completed",
+    },
+  });
+
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  // global states
   const users: any = useHookstate(globalState.users);
   const products: any = useHookstate(globalState.products);
   const orders: any = useHookstate(globalState.orders);
 
   const statuses = ["completed", "pending", "shipped", "cancelled"];
 
-  // --- Validation ---
-  const validateForm = () => {
-    if (!form.userId) {
-      toast.error("Please select a user");
-      return null;
-    }
-
-    if (!form.productId) {
-      toast.error("Please select a product");
-      return null;
-    }
-
-    const selectedProduct = products
-      .get({ noproxy: true })
-      .find((p: any) => p.id === form.productId);
-    if (!selectedProduct) {
-      toast.error("Invalid product");
-      return null;
-    }
-
-    const qty = Number(form.qty);
-    if (!qty || qty <= 0) {
-      toast.error("Quantity must be at least 1");
-      return null;
-    }
-
-    if (qty > 5) {
-      toast.error("Maximum allowed quantity is 5");
-      return null;
-    }
-
-    // ✅ allow editing even if new qty > current available, as long as stock + oldQty covers it
-    if (!form.id && qty > selectedProduct.availableQuantity) {
-      toast.error(
-        `Only ${selectedProduct.availableQuantity} items available in stock`
-      );
-      return null;
-    }
-
-    return {
-      ...form,
-      qty,
-    };
-  };
-
-  // --- Handle Submit (Create / Update Order) ---
-  const handleSubmit = async () => {
-    const validated = validateForm();
-    if (!validated) return false;
-
-    const selectedUser = users
-      .get({ noproxy: true })
-      .find((u: any) => u.id === validated.userId);
-    const selectedProduct = products
-      .get({ noproxy: true })
-      .find((p: any) => p.id === validated.productId);
-
-    const totalAmount = selectedProduct?.price * validated.qty;
-
+  // ---------------- Create / Update ----------------
+  const processSubmit = async (values: OrderFormType) => {
     try {
-      if (form?.id) {
+      const selectedUser = users
+        .get({ noproxy: true })
+        .find((u: any) => u.id === values.userId);
+      const selectedProduct = products
+        .get({ noproxy: true })
+        .find((p: any) => p.id === values.productId);
+
+      if (!selectedUser) {
+        toast.error("Invalid user");
+        return false;
+      }
+      if (!selectedProduct) {
+        toast.error("Invalid product");
+        return false;
+      }
+
+      const totalAmount = selectedProduct?.price * values.qty;
+
+      if (values.id) {
         // ---------- EDIT ORDER ----------
         const existingOrder = orders
           .get({ noproxy: true })
-          .find((o: any) => o.id === form.id);
+          .find((o: any) => o.id === values.id);
 
         if (!existingOrder) {
           toast.error("Order not found");
@@ -89,12 +75,12 @@ const useOrdersHook = () => {
         }
 
         // stock difference
-        const qtyDiff = validated.qty - existingOrder.qty;
+        const qtyDiff = values.qty - existingOrder.qty;
 
         // --- update order ---
         const updatedOrder = {
           ...existingOrder,
-          ...validated,
+          ...values,
           totalAmount,
         };
         await api.put(`/orders/${existingOrder.id}`, updatedOrder);
@@ -121,7 +107,7 @@ const useOrdersHook = () => {
 
         // --- update user spent ---
         const spentDiff =
-          selectedProduct.price * validated.qty -
+          selectedProduct.price * values.qty -
           selectedProduct.price * existingOrder.qty;
 
         await api.put(`/users/${selectedUser.id}`, {
@@ -150,32 +136,32 @@ const useOrdersHook = () => {
           userName: selectedUser?.name,
           productId: selectedProduct?.id,
           productName: selectedProduct?.name,
-          qty: validated.qty,
+          qty: values.qty,
           totalAmount,
-          status: validated.status || "completed",
+          status: values.status || "completed",
           orderDate: new Date().toISOString(),
         };
 
         const savedOrder = await api.post("/orders", payload);
         orders.set((prev: any) => [savedOrder, ...prev]);
 
-        // update product stock
+        // ----------update product stock--------------
         await api.put(`/products/${selectedProduct.id}`, {
           ...selectedProduct,
-          availableQuantity: selectedProduct.availableQuantity - validated.qty,
+          availableQuantity: selectedProduct.availableQuantity - values.qty,
         });
         products.set((prev: any) =>
           prev.map((p: any) =>
             p.id === selectedProduct.id
               ? {
                   ...p,
-                  availableQuantity: p.availableQuantity - validated.qty,
+                  availableQuantity: p.availableQuantity - values.qty,
                 }
               : p
           )
         );
 
-        // update user order stats
+        // -----------update user order stats---------
         await api.put(`/users/${selectedUser.id}`, {
           ...selectedUser,
           ordersCount: (selectedUser.ordersCount || 0) + 1,
@@ -198,7 +184,8 @@ const useOrdersHook = () => {
         toast.success("Order placed successfully");
       }
 
-      resetForm();
+      form.reset();
+      setDialogOpen(false);
       return true;
     } catch (err) {
       console.error("Error saving order:", err);
@@ -207,7 +194,7 @@ const useOrdersHook = () => {
     }
   };
 
-  // --- Handle Delete ---
+  // ---------------- Delete ----------------
   const handleDelete = async (orderId: string) => {
     try {
       const existingOrder = orders
@@ -222,11 +209,11 @@ const useOrdersHook = () => {
         .get({ noproxy: true })
         .find((p: any) => p.id === existingOrder.productId);
 
-      // delete order
+      // --------------delete order-----------
       await api.delete(`/orders/${orderId}`);
       orders.set((prev: any) => prev.filter((o: any) => o.id !== orderId));
 
-      // restore product stock
+      // --------------restore product stock------------------
       await api.put(`/products/${selectedProduct.id}`, {
         ...selectedProduct,
         availableQuantity:
@@ -243,7 +230,7 @@ const useOrdersHook = () => {
         )
       );
 
-      // update user stats
+      //------------- update user stats--------------
       await api.put(`/users/${selectedUser.id}`, {
         ...selectedUser,
         ordersCount: (selectedUser.ordersCount || 1) - 1,
@@ -268,13 +255,18 @@ const useOrdersHook = () => {
     }
   };
 
+  // ---------------- Edit ----------------
+  const handleEdit = (product: any) => {
+    form.reset({
+      ...product,
+    });
+  };
+
   return {
     form,
-    handleChange,
-    setForm,
-    resetForm,
-    handleSubmit,
+    processSubmit,
     handleDelete,
+    handleEdit,
     orders,
     users,
     products,

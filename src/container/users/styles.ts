@@ -6,16 +6,11 @@ export const FormStyledContainer = styled.div`
   margin: 0 auto;
   padding: 20px;
 
-  .formFieldSection {
-    margin-bottom: 20px;
-    border-bottom: 0.8px solid #363636;
-    padding-bottom: 10px;
-  }
-
   .formDoubleField {
     display: flex;
     flex-direction: column; /* stack on mobile */
     gap: 20px;
+    border-bottom: 1px solid #e7e7e7;
 
     @media (min-width: 640px) {
       /* sm and up → side by side */

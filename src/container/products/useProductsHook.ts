@@ -1,83 +1,80 @@
-import useForm from "@/hooks/useForm";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useHookstate } from "@hookstate/core";
+import { toast } from "sonner";
+import { z } from "zod";
+
 import { globalState } from "@/store/globalState";
 import api from "@/lib/api";
-import { toast } from "sonner";
 import { generateId } from "@/lib/utils";
-import { useState } from "react";
 
+// ---------------- Schema ----------------
+const ProductFormSchema = z.object({
+  id: z.string().optional(),
+  name: z
+    .string()
+    .min(3, { message: "Product Name must be at least 3 characters long." }),
+  category: z.string().min(1, { message: "Please enter a valid category." }),
+  description: z.string().min(4, { message: "Add a product description." }),
+  price: z
+    .number({ invalid_type_error: "Price must be a number." })
+    .positive({ message: "Price must be greater than 0." }),
+  availableQuantity: z
+    .number({ invalid_type_error: "Quantity must be a number." })
+    .int({ message: "Quantity must be an integer." })
+    .min(0, { message: "Quantity cannot be negative." }),
+  createdAt: z.string().optional(),
+});
+
+export type ProductFormType = z.infer<typeof ProductFormSchema>;
+
+// ---------------- Hook ----------------
 const useProductHook = () => {
-  const { form, handleChange, setForm, resetForm } = useForm();
   const [dialogOpen, setDialogOpen] = useState(false);
   const products = useHookstate(globalState.products);
+
   const categories = ["Electronics", "Fashion", "Books", "Home", "Sports"];
 
-  // --- Validation helper ---
-  const validateForm = () => {
-    if (!form.name || form.name.trim().length < 3) {
-      toast.error("Product name must be at least 3 characters long");
-      return null;
-    }
+  // react-hook-form + zod
+  const form = useForm<ProductFormType>({
+    resolver: zodResolver(ProductFormSchema),
+    defaultValues: {
+      name: "",
+      category: "",
+      description: "",
+      price: 0,
+      availableQuantity: 0,
+    },
+  });
 
-    if (!form.category) {
-      toast.error("Please select a category");
-      return null;
-    }
-
-    if (!form.description || form.description.trim().length < 10) {
-      toast.error("Description must be at least 10 characters long");
-      return null;
-    }
-
-    if (!form.price || Number(form.price) <= 0) {
-      toast.error("Price must be greater than 0");
-      return null;
-    }
-
-    if (
-      form.availableQuantity === undefined ||
-      form.availableQuantity === null ||
-      Number(form.availableQuantity) < 0
-    ) {
-      toast.error("Available Quantity must be 0 or more");
-      return null;
-    }
-
-    return {
-      ...form,
-      price: Number(form.price),
-      availableQuantity: Number(form.availableQuantity),
-    };
-  };
-
-  const handleSubmit = async () => {
-    const validated = validateForm();
-    if (!validated) return false;
-
-    const isEdit = !!validated.id;
+  // ---------------- Submit ----------------
+  const processSubmit = async (data: ProductFormType) => {
+    const isEdit = !!data.id;
 
     const payload = {
-      ...validated,
-      salesReport: validated.salesReport || [],
-      createdAt: isEdit ? validated.createdAt : new Date().toISOString(),
+      ...data,
+      createdAt: isEdit ? data.createdAt : new Date().toISOString(),
     };
 
     try {
       let savedProduct;
       if (isEdit) {
-        savedProduct = await api.put(`/products/${validated.id}`, payload);
-        products.set((prev) =>
-          prev.map((p: any) => (p.id === validated.id ? savedProduct : p))
+        savedProduct = await api.put(`/products/${data.id}`, payload);
+        products.set((prev: any) =>
+          prev.map((p: any) => (p.id === data.id ? savedProduct : p))
         );
         toast.success("Product updated successfully");
+        
       } else {
         payload.id = generateId();
         savedProduct = await api.post("/products", payload);
-        products.set((prev) => [savedProduct, ...prev]);
+        products.set((prev: any) => [savedProduct, ...prev]);
         toast.success("Product added successfully");
       }
 
-      resetForm();
+      form.reset();
+      setDialogOpen(false);
       return true;
     } catch (err) {
       console.error("Error submitting product:", err);
@@ -88,6 +85,7 @@ const useProductHook = () => {
     }
   };
 
+  // ---------------- Delete ----------------
   const handleDelete = async (id: string) => {
     try {
       await api.delete(`/products/${id}`);
@@ -99,17 +97,32 @@ const useProductHook = () => {
     }
   };
 
+  // ---------------- Edit ----------------
+  const handleEdit = (product: any) => {
+    // reset form with current product values
+    form.reset({
+      ...product,
+      price:
+        typeof product.price === "number"
+          ? product.price
+          : Number(product.price ?? 0),
+      availableQuantity:
+        typeof product.availableQuantity === "number"
+          ? product.availableQuantity
+          : Number(product.availableQuantity ?? 0),
+    });
+    setDialogOpen(true);
+  };
+
   return {
     form,
+    processSubmit,
     handleDelete,
-    handleChange,
-    setForm,
-    resetForm,
-    handleSubmit,
+    handleEdit,
     products,
     dialogOpen,
     setDialogOpen,
-    categories
+    categories,
   };
 };
 

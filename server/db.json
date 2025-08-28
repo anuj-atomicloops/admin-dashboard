@@ -106,10 +106,66 @@
       "status": "active",
       "address": "Uttar Pradesh, India",
       "gender": "male",
+      "ordersCount": 2,
+      "totalSpent": 21000,
+      "lastOrderDate": "2025-08-26T10:43:25.776Z",
+      "createdAt": "2025-08-26T10:37:14.377Z",
+      "lastLogin": null
+    },
+    {
+      "id": "ECS",
+      "name": "Pavan",
+      "phone": "915555592244",
+      "email": "anuj.kumar@atomicloops.com",
+      "gender": "male",
+      "status": "active",
+      "address": "sdgf dfdds",
+      "ordersCount": 0,
+      "totalSpent": 0,
+      "lastOrderDate": "2025-08-28T11:21:23.680Z",
+      "createdAt": "2025-08-26T12:37:48.427Z",
+      "lastLogin": null
+    },
+    {
+      "id": "qiD",
+      "name": "Anuj Kumar",
+      "email": "anuj.kumar@atomicloops.com",
+      "phone": "917676767767",
+      "gender": "male",
+      "status": "active",
+      "address": "dfd sdfds sdfds sd",
       "ordersCount": 0,
       "totalSpent": 0,
       "lastOrderDate": null,
-      "createdAt": "2025-08-26T10:37:14.377Z",
+      "createdAt": "2025-08-28T06:22:20.732Z",
+      "lastLogin": null
+    },
+    {
+      "id": "BOo",
+      "name": "bitttt Kumar",
+      "email": "bittu@gmail.com",
+      "phone": "917676767767",
+      "gender": "male",
+      "status": "active",
+      "address": "drg erg reg ergrtr",
+      "ordersCount": 1,
+      "totalSpent": 4000,
+      "lastOrderDate": "2025-08-28T11:24:29.956Z",
+      "createdAt": "2025-08-28T06:51:59.774Z",
+      "lastLogin": null
+    },
+    {
+      "id": "68u",
+      "name": "Anuj Kumar",
+      "email": "anuj.kumar@atomicloops.com",
+      "phone": "917676767767",
+      "gender": "male",
+      "status": "active",
+      "address": "cgfg df",
+      "ordersCount": 0,
+      "totalSpent": 0,
+      "lastOrderDate": null,
+      "createdAt": "2025-08-28T07:47:20.095Z",
       "lastLogin": null
     }
   ],
@@ -138,7 +194,7 @@
       "category": "Fashion",
       "description": "Stylish black leather jacket for winter",
       "price": 7500,
-      "availableQuantity": 21,
+      "availableQuantity": 19,
       "salesReport": []
     },
     {
@@ -147,7 +203,7 @@
       "category": "Fashion",
       "description": "Comfortable running sneakers for daily use",
       "price": 3000,
-      "availableQuantity": 47,
+      "availableQuantity": 45,
       "salesReport": []
     },
     {
@@ -201,8 +257,17 @@
       "category": "Sports",
       "description": "Non-slip yoga mat for home and gym",
       "price": 800,
-      "availableQuantity": 100,
+      "availableQuantity": 95,
       "salesReport": []
+    },
+    {
+      "id": "eGj",
+      "name": "Mix",
+      "category": "Electronics",
+      "description": "sdfdsf sdfdsf",
+      "price": 29999,
+      "availableQuantity": 10,
+      "createdAt": "2025-08-28T10:54:47.655Z"
     }
   ],
   "orders": [
@@ -315,6 +380,39 @@
       "totalAmount": 1200,
       "status": "completed",
       "orderDate": "2025-03-26T10:31:09.759Z"
+    },
+    {
+      "id": "6xM",
+      "userId": "DEN",
+      "userName": "Kapil Rajput",
+      "productId": "prod03",
+      "productName": "Leather Jacket",
+      "qty": 2,
+      "totalAmount": 15000,
+      "status": "completed",
+      "orderDate": "2025-08-26T10:42:57.550Z"
+    },
+    {
+      "id": "7Px",
+      "userId": "DEN",
+      "userName": "Kapil Rajput",
+      "productId": "prod04",
+      "productName": "Sneakers",
+      "qty": 2,
+      "totalAmount": 6000,
+      "status": "completed",
+      "orderDate": "2025-08-26T10:43:25.685Z"
+    },
+    {
+      "id": "hLa",
+      "userId": "BOo",
+      "userName": "bitttt Kumar",
+      "productId": "prod10",
+      "productName": "Yoga Mat",
+      "qty": 5,
+      "totalAmount": 4000,
+      "status": "completed",
+      "orderDate": "2025-08-28T11:19:32.340Z"
     }
   ]
 }

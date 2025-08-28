@@ -16,10 +16,7 @@ import useOrdersHook from "./useOrdersHook";
 export default function OrdersContainer() {
   const {
     form,
-    handleChange,
-    setForm,
-    resetForm,
-    handleSubmit,
+    processSubmit,
     orders,
     users,
     products,
@@ -27,6 +24,7 @@ export default function OrdersContainer() {
     dialogOpen,
     setDialogOpen,
     handleDelete,
+    handleEdit,
   } = useOrdersHook();
 
   const actionColumn = {
@@ -50,7 +48,7 @@ export default function OrdersContainer() {
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => {
-                setForm({ ...order });
+                handleEdit({ ...order });
                 setDialogOpen(true);
               }}
             >
@@ -83,11 +81,11 @@ export default function OrdersContainer() {
         dialogProps={{
           title: "orders",
           form,
-          setForm,
-          handleSubmit,
-          handleChange,
-          open: dialogOpen,
-          setOpen: setDialogOpen,
+
+          processSubmit,
+          statuses,
+          dialogOpen,
+          setDialogOpen,
           users: users.get(),
           products: products.get(),
         }}
