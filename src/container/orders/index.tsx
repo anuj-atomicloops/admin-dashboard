@@ -76,7 +76,7 @@ export default function OrdersContainer() {
       <DataTable
         columns={finalColumns}
         data={orders.get()}
-        searchBy={"userName"}
+        searchBy={["id", "userName", "productName", "userId"]}
         // ----form dialog props-----------
         dialogProps={{
           title: "orders",

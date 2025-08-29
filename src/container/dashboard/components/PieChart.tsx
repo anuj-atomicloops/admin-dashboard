@@ -20,19 +20,19 @@ import {
 
 export const description = "A pie chart with categories and available units";
 
-export function ChartPieLegend({ data }:any) {
+export function ChartPieLegend({ data }: any) {
   console.log(data, "productsData");
 
-  // 1. Group by category and sum availableQuantity
+  // -------- Group by category and sum availableQuantity-------
   const categoryMap: Record<string, number> = {};
-  data?.forEach((product) => {
+  data?.forEach((product: any) => {
     if (!categoryMap[product.category]) {
       categoryMap[product.category] = 0;
     }
     categoryMap[product.category] += product.availableQuantity;
   });
 
-  // 2. Define a color palette (each category gets a unique color)
+  // ------- Define a color palette -------
   const palette = [
     "var(--chart-1)",
     "var(--chart-2)",
@@ -41,7 +41,7 @@ export function ChartPieLegend({ data }:any) {
     "var(--chart-5)",
   ];
 
-  // 3. Convert to recharts-friendly chartData
+  // ----- Convert to recharts-friendly chartData--------
   const chartData = Object.entries(categoryMap).map(
     ([category, units], index) => ({
       category,
@@ -50,7 +50,7 @@ export function ChartPieLegend({ data }:any) {
     })
   );
 
-  // 4. Build chartConfig for legends
+  // ------- Build chartConfig for legends---------
   const chartConfig: ChartConfig = {
     units: { label: "Available Units" },
     ...Object.fromEntries(
@@ -75,7 +75,7 @@ export function ChartPieLegend({ data }:any) {
           className="mx-auto aspect-square max-h-[250px]"
         >
           <PieChart>
-            <Pie data={chartData}  dataKey="units" label nameKey="category"  />
+            <Pie data={chartData} dataKey="units" label nameKey="category" />
             <ChartTooltip content={<ChartTooltipContent />} />
             <ChartLegend
               content={<ChartLegendContent nameKey="category" />}

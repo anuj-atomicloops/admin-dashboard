@@ -70,7 +70,7 @@ export default function ProductsContainer() {
       <DataTable
         columns={finalColumns}
         data={products.get()}
-        searchBy={"name"}
+        searchBy={["name"]}
         // ----form dialog props-----------
         dialogProps={{
           title: "products",

@@ -14,7 +14,7 @@ const OrderFormSchema = z.object({
   userId: z.string().min(1, "Please select a user"),
   productId: z.string().min(1, "Please select a product"),
   qty: z
-    .number({ invalid_type_error: "Quantity is required" })
+    .number()
     .min(1, "Quantity must be at least 1")
     .max(5, "Maximum allowed quantity is 5"),
   status: z.enum(["completed", "pending", "shipped", "cancelled"]).optional(),

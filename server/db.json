@@ -22,9 +22,9 @@
       "address": "Pune, India",
       "gender": "male",
       "status": "active",
-      "ordersCount": 1,
-      "totalSpent": 7500,
-      "lastOrderDate": "2025-08-26T10:29:22.314Z",
+      "ordersCount": 2,
+      "totalSpent": 22500,
+      "lastOrderDate": "2025-08-29T11:39:13.226Z",
       "createdAt": "2025-08-18T08:30:00.000Z",
       "lastLogin": "2025-08-24T12:35:00.000Z"
     },
@@ -148,9 +148,9 @@
       "gender": "male",
       "status": "active",
       "address": "drg erg reg ergrtr",
-      "ordersCount": 1,
-      "totalSpent": 4000,
-      "lastOrderDate": "2025-08-28T11:24:29.956Z",
+      "ordersCount": 2,
+      "totalSpent": 11500,
+      "lastOrderDate": "2025-08-28T12:04:07.541Z",
       "createdAt": "2025-08-28T06:51:59.774Z",
       "lastLogin": null
     },
@@ -166,6 +166,34 @@
       "totalSpent": 0,
       "lastOrderDate": null,
       "createdAt": "2025-08-28T07:47:20.095Z",
+      "lastLogin": null
+    },
+    {
+      "id": "ivm",
+      "name": "Bittu",
+      "email": "bittu@gmail.com",
+      "phone": "917676767767",
+      "gender": "male",
+      "status": "active",
+      "address": "fg dfg f",
+      "ordersCount": 0,
+      "totalSpent": 0,
+      "lastOrderDate": null,
+      "createdAt": "2025-08-29T11:33:19.584Z",
+      "lastLogin": null
+    },
+    {
+      "id": "cyp",
+      "name": "Mix",
+      "email": "kapil@gmail.com",
+      "phone": "917676767767",
+      "gender": "male",
+      "status": "active",
+      "address": "dfgfg sdfds dfd ",
+      "ordersCount": 0,
+      "totalSpent": 0,
+      "lastOrderDate": null,
+      "createdAt": "2025-08-29T11:35:18.415Z",
       "lastLogin": null
     }
   ],
@@ -185,7 +213,7 @@
       "category": "Electronics",
       "description": "Fitness tracking smartwatch with heart rate monitor",
       "price": 5000,
-      "availableQuantity": 28,
+      "availableQuantity": 25,
       "salesReport": []
     },
     {
@@ -248,7 +276,7 @@
       "category": "Sports",
       "description": "Professional size 5 football",
       "price": 1500,
-      "availableQuantity": 55,
+      "availableQuantity": 50,
       "salesReport": []
     },
     {
@@ -413,6 +441,39 @@
       "totalAmount": 4000,
       "status": "completed",
       "orderDate": "2025-08-28T11:19:32.340Z"
+    },
+    {
+      "id": "Aym",
+      "userId": "BOo",
+      "userName": "bitttt Kumar",
+      "productId": "prod09",
+      "productName": "Football",
+      "qty": 5,
+      "totalAmount": 7500,
+      "status": "completed",
+      "orderDate": "2025-08-28T12:04:07.392Z"
+    },
+    {
+      "id": "psI",
+      "userId": "us06",
+      "userName": "Tony Stark",
+      "productId": "eGj",
+      "productName": "Mix",
+      "qty": 2,
+      "totalAmount": 59998,
+      "status": "completed",
+      "orderDate": "2025-08-29T11:37:09.681Z"
+    },
+    {
+      "id": "1Zv",
+      "userId": "us02",
+      "userName": "Rohan Verma",
+      "productId": "prod02",
+      "productName": "Smartwatch",
+      "qty": 3,
+      "totalAmount": 15000,
+      "status": "completed",
+      "orderDate": "2025-08-29T11:39:13.050Z"
     }
   ]
 }

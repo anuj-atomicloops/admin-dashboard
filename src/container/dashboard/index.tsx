@@ -4,7 +4,7 @@ import { globalState } from "@/store/globalState";
 import { ChartPieLegend } from "./components/PieChart";
 import { ChartLineLabel } from "./components/LineChart";
 import useDashboardHook from "./hook";
-import { Card, CardContent } from "@/components/ui/card";
+
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 function DashboardContainer() {

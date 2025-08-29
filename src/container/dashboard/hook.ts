@@ -63,48 +63,48 @@ const useDashboardHook = () => {
 
   // -------------------------------------------------------
   const todayRevenue = orders
-    .filter((o) => isSameDay(new Date(o.orderDate), now))
-    .reduce((acc, o) => acc + o.totalAmount, 0);
+    .filter((o: any) => isSameDay(new Date(o.orderDate), now))
+    .reduce((acc, o: any) => acc + o.totalAmount, 0);
 
   const yesterdayRevenue = orders
-    .filter((o) => isYesterday(new Date(o.orderDate), now))
-    .reduce((acc, o) => acc + o.totalAmount, 0);
+    .filter((o: any) => isYesterday(new Date(o.orderDate), now))
+    .reduce((acc, o: any) => acc + o.totalAmount, 0);
 
   const thisWeekRevenue = orders
-    .filter((o) => isSameWeek(new Date(o.orderDate), now))
-    .reduce((acc, o) => acc + o.totalAmount, 0);
+    .filter((o: any) => isSameWeek(new Date(o.orderDate), now))
+    .reduce((acc, o: any) => acc + o.totalAmount, 0);
 
   const lastWeekRevenue = orders
-    .filter((o) => isLastWeek(new Date(o.orderDate), now))
-    .reduce((acc, o) => acc + o.totalAmount, 0);
+    .filter((o: any) => isLastWeek(new Date(o.orderDate), now))
+    .reduce((acc, o: any) => acc + o.totalAmount, 0);
 
   const thisMonthRevenue = orders
-    .filter((o) => isSameMonth(new Date(o.orderDate), now))
-    .reduce((acc, o) => acc + o.totalAmount, 0);
+    .filter((o: any) => isSameMonth(new Date(o.orderDate), now))
+    .reduce((acc, o: any) => acc + o.totalAmount, 0);
 
   const lastMonthRevenue = orders
-    .filter((o) => isLastMonth(new Date(o.orderDate), now))
-    .reduce((acc, o) => acc + o.totalAmount, 0);
+    .filter((o: any) => isLastMonth(new Date(o.orderDate), now))
+    .reduce((acc, o: any) => acc + o.totalAmount, 0);
 
   const thisYearRevenue = orders
-    .filter((o) => isSameYear(new Date(o.orderDate), now))
-    .reduce((acc, o) => acc + o.totalAmount, 0);
+    .filter((o: any) => isSameYear(new Date(o.orderDate), now))
+    .reduce((acc, o: any) => acc + o.totalAmount, 0);
 
   const lastYearRevenue = orders
-    .filter((o) => isLastYear(new Date(o.orderDate), now))
-    .reduce((acc, o) => acc + o.totalAmount, 0);
+    .filter((o: any) => isLastYear(new Date(o.orderDate), now))
+    .reduce((acc, o: any) => acc + o.totalAmount, 0);
 
-  const totalRevenue = orders.reduce((acc, o) => acc + o.totalAmount, 0);
+  const totalRevenue = orders.reduce((acc, o: any) => acc + o.totalAmount, 0);
 
   //----------- Monthly Revenue (Jan - Dec) --------------------
   const monthlyRevenue = Array.from({ length: 12 }, (_, monthIdx) => {
     const monthRevenue = orders
       .filter(
-        (o) =>
+        (o: any) =>
           new Date(o.orderDate).getFullYear() === now.getFullYear() &&
           new Date(o.orderDate).getMonth() === monthIdx
       )
-      .reduce((acc, o) => acc + o.totalAmount, 0);
+      .reduce((acc, o: any) => acc + o.totalAmount, 0);
 
     return {
       month: new Date(0, monthIdx).toLocaleString("default", { month: "long" }),

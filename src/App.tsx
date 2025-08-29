@@ -21,35 +21,19 @@ const queryClient = new QueryClient();
 function App() {
   const store = useHookstate(globalState);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const data = await api.get("/users");
-        store.users.set(data.reverse());
-      } catch (err) {
-        console.error("Error fetching users:", err);
-      }
-    };
-    const fetchProducts = async () => {
-      try {
-        const data = await api.get("/products");
-        store.products.set(data.reverse());
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
-    const fetchOrders = async () => {
-      try {
-        const data = await api.get("/orders");
-        store.orders.set(data.reverse());
-      } catch (error) {
-        console.error("Error fetching orders:", error);
-      }
-    };
+  const fetchData = async (endpoint: string, setter: any) => {
+    try {
+      const data = await api.get(endpoint);
+      setter(data.reverse());
+    } catch (error) {
+      console.error(`Error fetching ${endpoint}:`, error);
+    }
+  };
 
-    fetchUsers();
-    fetchProducts();
-    fetchOrders();
+  useEffect(() => {
+    fetchData("/users", store.users.set);
+    fetchData("/products", store.products.set);
+    fetchData("/orders", store.orders.set);
   }, []);
 
   return (

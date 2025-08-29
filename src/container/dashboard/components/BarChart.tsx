@@ -1,7 +1,7 @@
 "use client";
 
 import { TrendingDown, TrendingUp } from "lucide-react";
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import {
   Card,
   CardContent,
@@ -41,7 +41,7 @@ export function ChartBarDefault({ data: users }: any) {
     }
 
     //------------------ Count users per day
-    users.forEach((user) => {
+    users.forEach((user: any) => {
       const created = new Date(user.createdAt);
       const day = created.toLocaleDateString("en-US", { weekday: "short" });
 
@@ -67,7 +67,7 @@ export function ChartBarDefault({ data: users }: any) {
   const isUp = trend >= 0;
 
   return (
-    <Card  className="flex flex-col shadow-none border-0">
+    <Card className="flex flex-col shadow-none border-0">
       <CardHeader>
         <CardTitle>Users Joined</CardTitle>
         <CardDescription>Last 7 days</CardDescription>
@@ -86,7 +86,7 @@ export function ChartBarDefault({ data: users }: any) {
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            
+
             <Bar dataKey="users" fill="var(--color-users)" radius={8} />
           </BarChart>
         </ChartContainer>

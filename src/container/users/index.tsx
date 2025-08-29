@@ -1,6 +1,5 @@
 import { UsersTableColumns } from "@/container/users/UsersTableColumns";
 import { DataTable } from "@/layouts/data-table";
-import useUserHook from "./useUserHook";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -11,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
+import useUserHook from "./useUserHook";
 
 export default function UsersContainer() {
   const {
@@ -72,7 +72,7 @@ export default function UsersContainer() {
       <DataTable
         columns={finalColumns}
         data={users.get()}
-        searchBy={"email"}
+        searchBy={["email", "phone", "name"]}
         // ----form dialog props-----------
         dialogProps={{
           title: "user",

@@ -1,16 +1,11 @@
 import * as React from "react";
 import {
   AudioWaveform,
-  BookOpen,
   Bot,
   Command,
-  Frame,
   GalleryVerticalEnd,
   ListOrdered,
-  Map,
   PieChart,
-  Settings2,
-  SquareTerminal,
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
@@ -87,8 +82,6 @@ const data = {
         // { title: "All Orders", url: "/orders" },
       ],
     },
-   
-    
   ],
 
   projects: [
@@ -115,7 +108,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <TeamSwitcher teams={data.teams} />
-        
       </SidebarHeader>
       <SidebarContent>
         <NavProjects projects={data.projects} />

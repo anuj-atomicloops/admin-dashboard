@@ -17,11 +17,9 @@ const ProductFormSchema = z.object({
     .min(3, { message: "Product Name must be at least 3 characters long." }),
   category: z.string().min(1, { message: "Please enter a valid category." }),
   description: z.string().min(4, { message: "Add a product description." }),
-  price: z
-    .number({ invalid_type_error: "Price must be a number." })
-    .positive({ message: "Price must be greater than 0." }),
+  price: z.number().positive({ message: "Price must be greater than 0." }),
   availableQuantity: z
-    .number({ invalid_type_error: "Quantity must be a number." })
+    .number()
     .int({ message: "Quantity must be an integer." })
     .min(0, { message: "Quantity cannot be negative." }),
   createdAt: z.string().optional(),
@@ -58,18 +56,17 @@ const useProductHook = () => {
     };
 
     try {
-      let savedProduct;
+      let savedProduct: ProductFormType;
       if (isEdit) {
         savedProduct = await api.put(`/products/${data.id}`, payload);
         products.set((prev: any) =>
           prev.map((p: any) => (p.id === data.id ? savedProduct : p))
         );
         toast.success("Product updated successfully");
-        
       } else {
         payload.id = generateId();
         savedProduct = await api.post("/products", payload);
-        products.set((prev: any) => [savedProduct, ...prev]);
+        products.set((prev) => [savedProduct, ...prev]);
         toast.success("Product added successfully");
       }
 

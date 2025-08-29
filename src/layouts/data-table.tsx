@@ -28,15 +28,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { FormDialog } from "@/layouts/FormDialog";
+import { DataTablePagination } from "./data-table-pagination";
 
 export function DataTable({
-  searchBy = "email",
+  searchBy = ["name"],
   dialogProps,
   columns,
   data,
-  
 }: any) {
-  console.log(columns, "data table");
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -44,6 +43,7 @@ export function DataTable({
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
+  const [globalFilter, setGlobalFilter] = React.useState("");
 
   const table = useReactTable({
     data,
@@ -61,21 +61,35 @@ export function DataTable({
       columnFilters,
       columnVisibility,
       rowSelection,
+      globalFilter,
+    },
+    onGlobalFilterChange: setGlobalFilter,
+    globalFilterFn: (row, _columnId, filterValue) => {
+      if (!filterValue) return true;
+      const search = filterValue.toLowerCase();
+      const keys = searchBy;
+
+      return keys.some((key: any) => {
+        const value = row.getValue(key);
+        return String(value ?? "")
+          .toLowerCase()
+          .includes(search);
+      });
     },
   });
+
   return (
     <div>
-      <div className="flex justify-between py-4  border-red-500">
+      <div className="flex justify-between py-4">
         <Input
-          placeholder={`Search by ${searchBy}...`}
-          value={(table.getColumn(searchBy)?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn(searchBy)?.setFilterValue(event.target.value)
-          }
+          placeholder={`Search by ${searchBy.join(", ")}...`}
+          value={globalFilter ?? ""}
+          onChange={(event) => setGlobalFilter(event.target.value)}
           className="max-w-sm"
         />
-        {/* -------------column and add new button-------------- */}
-        <div className="flex gap-4 ">
+
+        {/*------- column visibility + add new dialog --------------*/}
+        <div className="flex gap-4">
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Button variant="outline" className="ml-auto">
@@ -86,44 +100,41 @@ export function DataTable({
               {table
                 .getAllColumns()
                 .filter((column) => column.getCanHide())
-                .map((column) => {
-                  return (
-                    <DropdownMenuCheckboxItem
-                      key={column.id}
-                      className="capitalize"
-                      checked={column.getIsVisible()}
-                      onCheckedChange={(value) =>
-                        column.toggleVisibility(!!value)
-                      }
-                    >
-                      {column.id}
-                    </DropdownMenuCheckboxItem>
-                  );
-                })}
+                .map((column) => (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                ))}
             </DropdownMenuContent>
           </DropdownMenu>
-          {/* -----add new user form dialog--------- */}
 
           {dialogProps && <FormDialog {...dialogProps} />}
         </div>
       </div>
+
+      {/*-------------- data table -----------*/}
       <div className="overflow-hidden rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
+                ))}
               </TableRow>
             ))}
           </TableHeader>
@@ -157,24 +168,9 @@ export function DataTable({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
-      </div>
+
+      {/*------------ pagination + rows per page selector --------------*/}
+      <DataTablePagination table={table} />
     </div>
   );
 }

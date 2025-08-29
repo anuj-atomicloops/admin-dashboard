@@ -1,16 +1,7 @@
 import type { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
+
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 export const UsersTableColumns: ColumnDef<any>[] = [
   //   {
@@ -65,7 +56,7 @@ export const UsersTableColumns: ColumnDef<any>[] = [
       );
     },
   },
-   {
+  {
     accessorKey: "phone",
     header: "Phone",
   },
@@ -73,10 +64,11 @@ export const UsersTableColumns: ColumnDef<any>[] = [
     accessorKey: "status",
     header: "Status",
   },
-    {
+  {
     accessorKey: "gender",
     header: "Gender",
-  },{
+  },
+  {
     accessorKey: "totalSpent",
     header: "₹ Total Spent",
   },

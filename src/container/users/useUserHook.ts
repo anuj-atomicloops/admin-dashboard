@@ -30,13 +30,14 @@ const UserFormSchema = z.object({
   lastLogin: z.string().nullable().optional(),
 });
 
+export type UserFormData = z.infer<typeof UserFormSchema>;
 
 const useUserHook = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const users = useHookstate(globalState.users);
 
   // -----------------------------------------------------
-  const form = useForm<z.infer<typeof UserFormSchema>>({
+  const form = useForm<UserFormData>({
     resolver: zodResolver(UserFormSchema),
     defaultValues: {
       name: "",
@@ -51,7 +52,7 @@ const useUserHook = () => {
   //  --------------------handle submit----------------------
   const processSubmit = async (data: z.infer<typeof UserFormSchema>) => {
     const isEdit = !!data.id;
-  
+
     const payload = {
       ...data,
       phone: `91${data.phone}`,
@@ -63,7 +64,7 @@ const useUserHook = () => {
     };
 
     try {
-      let savedUser;
+      let savedUser: UserFormData;
       if (isEdit) {
         savedUser = await api.put(`/users/${data.id}`, payload);
         users.set((prev: any) =>
@@ -73,10 +74,10 @@ const useUserHook = () => {
       } else {
         payload.id = generateId();
         savedUser = await api.post("/users", payload);
-        users.set((prev: any) => [savedUser, ...prev]);
+        users.set((prev) => [savedUser, ...prev]);
         toast.success("User added successfully");
       }
-      
+
       form.reset();
       setDialogOpen(false);
       return true;

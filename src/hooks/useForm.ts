@@ -16,7 +16,7 @@ function useForm(initialState = {}, onSubmit: any) {
 
   //---------------- handle form submit
   const handleSubmit = useCallback(
-    (event) => {
+    (event: any) => {
       event?.preventDefault();
       onSubmit?.(form);
     },
@@ -28,8 +28,8 @@ function useForm(initialState = {}, onSubmit: any) {
     setForm(initialState);
   }, [initialState]);
 
-  // -----------------set value 
-  const setInForm = useCallback((name, value) => {
+  // -----------------set value
+  const setInForm = useCallback((name: any, value: any) => {
     setForm((prev) => ({
       ...prev,
       [name]: value,
