@@ -28,6 +28,7 @@ import {
 
 import { Switch } from "@/components/ui/switch";
 import { useTheme } from "@/providers/theme-provider";
+import { useAuth } from "@/container/auth/useAuth";
 
 export function NavUser({
   user,
@@ -40,7 +41,7 @@ export function NavUser({
 }) {
   const { isMobile } = useSidebar();
   const { theme, setTheme } = useTheme();
-
+  const { logout } = useAuth();
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -125,7 +126,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={logout}>
               <LogOut />
               Log out
             </DropdownMenuItem>

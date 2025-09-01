@@ -23,6 +23,8 @@ export default function UsersContainer() {
     setDialogOpen,
   } = useUserHook();
 
+  console.log(users, "all users");
+
   const actionColumn = {
     id: "actions",
     header: "Actions",
@@ -72,7 +74,7 @@ export default function UsersContainer() {
       <DataTable
         columns={finalColumns}
         data={users.get()}
-        searchBy={["email", "phone", "name"]}
+        searchBy={["email", "phone", "name", "gender"]}
         // ----form dialog props-----------
         dialogProps={{
           title: "user",

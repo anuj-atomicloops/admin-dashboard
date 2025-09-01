@@ -34,7 +34,10 @@ export type UserFormData = z.infer<typeof UserFormSchema>;
 
 const useUserHook = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
+
   const users = useHookstate(globalState.users);
+
+  console.log(users, "all users here in hook");
 
   // -----------------------------------------------------
   const form = useForm<UserFormData>({

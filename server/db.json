@@ -181,20 +181,6 @@
       "lastOrderDate": null,
       "createdAt": "2025-08-29T11:33:19.584Z",
       "lastLogin": null
-    },
-    {
-      "id": "cyp",
-      "name": "Mix",
-      "email": "kapil@gmail.com",
-      "phone": "917676767767",
-      "gender": "male",
-      "status": "active",
-      "address": "dfgfg sdfds dfd ",
-      "ordersCount": 0,
-      "totalSpent": 0,
-      "lastOrderDate": null,
-      "createdAt": "2025-08-29T11:35:18.415Z",
-      "lastLogin": null
     }
   ],
   "products": [
