@@ -23,7 +23,7 @@ export default function UsersContainer() {
     setDialogOpen,
   } = useUserHook();
 
-  console.log(users, "all users");
+  console.log(users.get(), "all users");
 
   const actionColumn = {
     id: "actions",

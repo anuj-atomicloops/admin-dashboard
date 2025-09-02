@@ -30,13 +30,13 @@ export default function LoginContainer() {
   });
 
   const onSubmit = async (values: any) => {
-    const success = await login(values);
+    const { success, message } = await login(values);
 
     if (success) {
       navigate("/dashboard");
-      toast.success("Login Successful");
+      toast.success(message);
     } else {
-      toast.error("Login failed");
+      toast.error(message);
     }
   };
 

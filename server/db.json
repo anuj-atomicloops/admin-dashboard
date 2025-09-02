@@ -4,12 +4,12 @@
       "id": "us01",
       "name": "Priya Sharma",
       "email": "priya.sharma@example.com",
-      "phone": "914654564654",
-      "address": "Mumbai, India",
+      "phone": "917979746435",
       "gender": "female",
       "status": "active",
-      "ordersCount": 1,
-      "totalSpent": 2500,
+      "address": "Mumbai, India",
+      "ordersCount": 0,
+      "totalSpent": 0,
       "lastOrderDate": "2025-08-26T10:29:45.619Z",
       "createdAt": "2025-08-20T09:00:00.000Z",
       "lastLogin": "2025-08-24T10:00:00.000Z"
@@ -22,8 +22,8 @@
       "address": "Pune, India",
       "gender": "male",
       "status": "active",
-      "ordersCount": 2,
-      "totalSpent": 22500,
+      "ordersCount": 0,
+      "totalSpent": 0,
       "lastOrderDate": "2025-08-29T11:39:13.226Z",
       "createdAt": "2025-08-18T08:30:00.000Z",
       "lastLogin": "2025-08-24T12:35:00.000Z"
@@ -36,8 +36,8 @@
       "address": "Delhi, India",
       "gender": "female",
       "status": "active",
-      "ordersCount": 1,
-      "totalSpent": 4800,
+      "ordersCount": 0,
+      "totalSpent": 0,
       "lastOrderDate": "2025-08-26T07:53:28.378Z",
       "createdAt": "2025-08-24T10:18:30.190Z",
       "lastLogin": null
@@ -50,8 +50,8 @@
       "address": "Bangalore, India",
       "gender": "female",
       "status": "active",
-      "ordersCount": 1,
-      "totalSpent": 10000,
+      "ordersCount": 0,
+      "totalSpent": 0,
       "lastOrderDate": "2025-08-26T10:29:32.236Z",
       "createdAt": "2025-08-25T10:44:39.894Z",
       "lastLogin": null
@@ -64,9 +64,9 @@
       "address": "Hyderabad, India",
       "gender": "male",
       "status": "active",
-      "ordersCount": 3,
-      "totalSpent": 14400,
-      "lastOrderDate": "2025-08-26T10:30:59.771Z",
+      "ordersCount": 1,
+      "totalSpent": 10000,
+      "lastOrderDate": "2025-09-02T12:35:50.791Z",
       "createdAt": "2025-08-22T11:41:42.357Z",
       "lastLogin": null
     },
@@ -78,8 +78,8 @@
       "address": "New York, USA",
       "gender": "male",
       "status": "active",
-      "ordersCount": 3,
-      "totalSpent": 12200,
+      "ordersCount": 0,
+      "totalSpent": 0,
       "lastOrderDate": "2025-08-26T10:31:09.827Z",
       "createdAt": "2025-08-22T11:50:35.812Z",
       "lastLogin": null
@@ -99,20 +99,6 @@
       "lastLogin": null
     },
     {
-      "id": "DEN",
-      "name": "Kapil Rajput",
-      "phone": "919111099757",
-      "email": "kapil@gmail.com",
-      "status": "active",
-      "address": "Uttar Pradesh, India",
-      "gender": "male",
-      "ordersCount": 2,
-      "totalSpent": 21000,
-      "lastOrderDate": "2025-08-26T10:43:25.776Z",
-      "createdAt": "2025-08-26T10:37:14.377Z",
-      "lastLogin": null
-    },
-    {
       "id": "ECS",
       "name": "Pavan",
       "phone": "915555592244",
@@ -127,59 +113,17 @@
       "lastLogin": null
     },
     {
-      "id": "qiD",
-      "name": "Anuj Kumar",
-      "email": "anuj.kumar@atomicloops.com",
+      "id": "z3Q",
+      "name": "harry",
+      "email": "harry@gmail.com",
       "phone": "917676767767",
       "gender": "male",
       "status": "active",
-      "address": "dfd sdfds sdfds sd",
+      "address": "dgd dfgf",
       "ordersCount": 0,
       "totalSpent": 0,
-      "lastOrderDate": null,
-      "createdAt": "2025-08-28T06:22:20.732Z",
-      "lastLogin": null
-    },
-    {
-      "id": "BOo",
-      "name": "bitttt Kumar",
-      "email": "bittu@gmail.com",
-      "phone": "917676767767",
-      "gender": "male",
-      "status": "active",
-      "address": "drg erg reg ergrtr",
-      "ordersCount": 2,
-      "totalSpent": 11500,
-      "lastOrderDate": "2025-08-28T12:04:07.541Z",
-      "createdAt": "2025-08-28T06:51:59.774Z",
-      "lastLogin": null
-    },
-    {
-      "id": "68u",
-      "name": "Anuj Kumar",
-      "email": "anuj.kumar@atomicloops.com",
-      "phone": "917676767767",
-      "gender": "male",
-      "status": "active",
-      "address": "cgfg df",
-      "ordersCount": 0,
-      "totalSpent": 0,
-      "lastOrderDate": null,
-      "createdAt": "2025-08-28T07:47:20.095Z",
-      "lastLogin": null
-    },
-    {
-      "id": "ivm",
-      "name": "Bittu",
-      "email": "bittu@gmail.com",
-      "phone": "917676767767",
-      "gender": "male",
-      "status": "active",
-      "address": "fg dfg f",
-      "ordersCount": 0,
-      "totalSpent": 0,
-      "lastOrderDate": null,
-      "createdAt": "2025-08-29T11:33:19.584Z",
+      "lastOrderDate": "2025-09-02T12:26:03.538Z",
+      "createdAt": "2025-09-02T12:25:44.557Z",
       "lastLogin": null
     }
   ],
@@ -188,10 +132,9 @@
       "id": "prod01",
       "name": "Wireless Headphones",
       "category": "Electronics",
-      "description": "Noise-cancelling Bluetooth headphones with 20h battery life",
-      "price": 2500,
-      "availableQuantity": 50,
-      "salesReport": []
+      "description": "Noise-cancelling Bluetooth headphones with 30h battery life",
+      "price": 1299,
+      "availableQuantity": 56
     },
     {
       "id": "prod02",
@@ -199,7 +142,7 @@
       "category": "Electronics",
       "description": "Fitness tracking smartwatch with heart rate monitor",
       "price": 5000,
-      "availableQuantity": 25,
+      "availableQuantity": 28,
       "salesReport": []
     },
     {
@@ -208,7 +151,7 @@
       "category": "Fashion",
       "description": "Stylish black leather jacket for winter",
       "price": 7500,
-      "availableQuantity": 19,
+      "availableQuantity": 21,
       "salesReport": []
     },
     {
@@ -217,7 +160,7 @@
       "category": "Fashion",
       "description": "Comfortable running sneakers for daily use",
       "price": 3000,
-      "availableQuantity": 45,
+      "availableQuantity": 51,
       "salesReport": []
     },
     {
@@ -235,7 +178,7 @@
       "category": "Books",
       "description": "Self-help book by James Clear",
       "price": 600,
-      "availableQuantity": 78,
+      "availableQuantity": 80,
       "salesReport": []
     },
     {
@@ -244,7 +187,7 @@
       "category": "Home",
       "description": "Modern wooden coffee table",
       "price": 2000,
-      "availableQuantity": 24,
+      "availableQuantity": 28,
       "salesReport": []
     },
     {
@@ -253,7 +196,7 @@
       "category": "Home",
       "description": "Energy-saving desk lamp",
       "price": 1200,
-      "availableQuantity": 44,
+      "availableQuantity": 50,
       "salesReport": []
     },
     {
@@ -262,7 +205,7 @@
       "category": "Sports",
       "description": "Professional size 5 football",
       "price": 1500,
-      "availableQuantity": 50,
+      "availableQuantity": 62,
       "salesReport": []
     },
     {
@@ -271,195 +214,21 @@
       "category": "Sports",
       "description": "Non-slip yoga mat for home and gym",
       "price": 800,
-      "availableQuantity": 95,
+      "availableQuantity": 100,
       "salesReport": []
-    },
-    {
-      "id": "eGj",
-      "name": "Mix",
-      "category": "Electronics",
-      "description": "sdfdsf sdfdsf",
-      "price": 29999,
-      "availableQuantity": 10,
-      "createdAt": "2025-08-28T10:54:47.655Z"
     }
   ],
   "orders": [
     {
-      "id": "i8c",
+      "id": "JyH",
       "userId": "us05",
       "userName": "Anuj Kumar",
-      "productId": "prod04",
-      "productName": "Sneakers",
-      "qty": 3,
-      "totalAmount": 9000,
-      "status": "completed",
-      "orderDate": "2025-02-18T07:29:40.708Z"
-    },
-    {
-      "id": "UsH",
-      "userId": "us06",
-      "userName": "Tony Stark",
-      "productId": "prod09",
-      "productName": "Football",
-      "qty": 2,
-      "totalAmount": 3000,
-      "status": "completed",
-      "orderDate": "2025-04-26T07:51:16.278Z"
-    },
-    {
-      "id": "Mcj",
-      "userId": "us03",
-      "userName": "Natasha Singh",
-      "productId": "prod08",
-      "productName": "LED Lamp",
-      "qty": 4,
-      "totalAmount": 4800,
-      "status": "completed",
-      "orderDate": "2025-03-26T07:53:28.289Z"
-    },
-    {
-      "id": "Mgc",
-      "userId": "us06",
-      "userName": "Tony Stark",
-      "productId": "prod07",
-      "productName": "Coffee Table",
-      "qty": 4,
-      "totalAmount": 8000,
-      "status": "completed",
-      "orderDate": "2025-04-26T10:29:11.808Z"
-    },
-    {
-      "id": "6DC",
-      "userId": "us02",
-      "userName": "Rohan Verma",
-      "productId": "prod09",
-      "productName": "Football",
-      "qty": 5,
-      "totalAmount": 7500,
-      "status": "completed",
-      "orderDate": "2025-05-26T10:29:22.235Z"
-    },
-    {
-      "id": "CvU",
-      "userId": "us04",
-      "userName": "Anushka Rao",
       "productId": "prod02",
       "productName": "Smartwatch",
       "qty": 2,
       "totalAmount": 10000,
       "status": "completed",
-      "orderDate": "2025-06-26T10:29:32.149Z"
-    },
-    {
-      "id": "o3o",
-      "userId": "us01",
-      "userName": "Priya Sharma",
-      "productId": "prod01",
-      "productName": "Wireless Headphones",
-      "qty": 1,
-      "totalAmount": 2500,
-      "status": "completed",
-      "orderDate": "2025-01-26T10:29:45.545Z"
-    },
-    {
-      "id": "kDS",
-      "userId": "us05",
-      "userName": "Anuj Kumar",
-      "productId": "prod08",
-      "productName": "LED Lamp",
-      "qty": 2,
-      "totalAmount": 2400,
-      "status": "completed",
-      "orderDate": "2025-01-26T10:29:52.673Z"
-    },
-    {
-      "id": "9r2",
-      "userId": "us05",
-      "userName": "Anuj Kumar",
-      "productId": "prod04",
-      "productName": "Sneakers",
-      "qty": 1,
-      "totalAmount": 3000,
-      "status": "completed",
-      "orderDate": "2025-02-26T10:30:59.683Z"
-    },
-    {
-      "id": "rIm",
-      "userId": "us06",
-      "userName": "Tony Stark",
-      "productId": "prod06",
-      "productName": "Atomic Habits",
-      "qty": 2,
-      "totalAmount": 1200,
-      "status": "completed",
-      "orderDate": "2025-03-26T10:31:09.759Z"
-    },
-    {
-      "id": "6xM",
-      "userId": "DEN",
-      "userName": "Kapil Rajput",
-      "productId": "prod03",
-      "productName": "Leather Jacket",
-      "qty": 2,
-      "totalAmount": 15000,
-      "status": "completed",
-      "orderDate": "2025-08-26T10:42:57.550Z"
-    },
-    {
-      "id": "7Px",
-      "userId": "DEN",
-      "userName": "Kapil Rajput",
-      "productId": "prod04",
-      "productName": "Sneakers",
-      "qty": 2,
-      "totalAmount": 6000,
-      "status": "completed",
-      "orderDate": "2025-08-26T10:43:25.685Z"
-    },
-    {
-      "id": "hLa",
-      "userId": "BOo",
-      "userName": "bitttt Kumar",
-      "productId": "prod10",
-      "productName": "Yoga Mat",
-      "qty": 5,
-      "totalAmount": 4000,
-      "status": "completed",
-      "orderDate": "2025-08-28T11:19:32.340Z"
-    },
-    {
-      "id": "Aym",
-      "userId": "BOo",
-      "userName": "bitttt Kumar",
-      "productId": "prod09",
-      "productName": "Football",
-      "qty": 5,
-      "totalAmount": 7500,
-      "status": "completed",
-      "orderDate": "2025-08-28T12:04:07.392Z"
-    },
-    {
-      "id": "psI",
-      "userId": "us06",
-      "userName": "Tony Stark",
-      "productId": "eGj",
-      "productName": "Mix",
-      "qty": 2,
-      "totalAmount": 59998,
-      "status": "completed",
-      "orderDate": "2025-08-29T11:37:09.681Z"
-    },
-    {
-      "id": "1Zv",
-      "userId": "us02",
-      "userName": "Rohan Verma",
-      "productId": "prod02",
-      "productName": "Smartwatch",
-      "qty": 3,
-      "totalAmount": 15000,
-      "status": "completed",
-      "orderDate": "2025-08-29T11:39:13.050Z"
+      "orderDate": "2025-09-02T12:35:50.667Z"
     }
   ]
 }

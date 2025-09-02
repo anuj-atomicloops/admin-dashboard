@@ -1,15 +1,19 @@
 import { useHookstate } from "@hookstate/core";
 import { ChartBarDefault } from "./components/BarChart";
-import { globalState } from "@/store/globalState";
 import { ChartPieLegend } from "./components/PieChart";
 import { ChartLineLabel } from "./components/LineChart";
 import useDashboardHook from "./hook";
 
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { userActions, userState } from "@/store/userState";
+import { productActions, productState } from "@/store/productState";
+import { useEffect } from "react";
+import { orderActions } from "@/store/orderState";
+import { toast } from "sonner";
 
 function DashboardContainer() {
-  const users = useHookstate(globalState?.users);
-  const products = useHookstate(globalState?.products);
+  const users = useHookstate(userState);
+  const products = useHookstate(productState);
 
   const {
     todayRevenue,
@@ -31,16 +35,21 @@ function DashboardContainer() {
     { label: "This Month", value: thisMonthRevenue },
     { label: "This Year", value: thisYearRevenue },
     { label: "Last Week", value: lastWeekRevenue },
-
     { label: "Last Month", value: lastMonthRevenue },
-
     { label: "Last Year", value: lastYearRevenue },
   ];
+
+  useEffect(() => {
+    orderActions.fetchAll().catch(() => toast.error("Failed to fetch orders"));
+    userActions.fetchAll().catch(() => toast.error("Failed to fetch users"));
+    productActions
+      .fetchAll()
+      .catch(() => toast.error("Failed to fetch products"));
+  }, []);
 
   return (
     <div className="flex flex-1 flex-col gap-6 pt-0">
       <div className="flex justify-between">
-      
         <h3 className="text-xl font-bold">Admin Dashboard</h3>
         <ThemeToggle />
       </div>
