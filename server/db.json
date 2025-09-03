@@ -22,9 +22,9 @@
       "address": "Pune, India",
       "gender": "male",
       "status": "active",
-      "ordersCount": 0,
-      "totalSpent": 0,
-      "lastOrderDate": "2025-08-29T11:39:13.226Z",
+      "ordersCount": 1,
+      "totalSpent": 7500,
+      "lastOrderDate": "2025-09-03T11:11:47.212Z",
       "createdAt": "2025-08-18T08:30:00.000Z",
       "lastLogin": "2025-08-24T12:35:00.000Z"
     },
@@ -151,7 +151,7 @@
       "category": "Fashion",
       "description": "Stylish black leather jacket for winter",
       "price": 7500,
-      "availableQuantity": 21,
+      "availableQuantity": 20,
       "salesReport": []
     },
     {
@@ -229,6 +229,17 @@
       "totalAmount": 10000,
       "status": "completed",
       "orderDate": "2025-09-02T12:35:50.667Z"
+    },
+    {
+      "id": "bW0",
+      "userId": "us02",
+      "userName": "Rohan Verma",
+      "productId": "prod03",
+      "productName": "Leather Jacket",
+      "qty": 1,
+      "totalAmount": 7500,
+      "status": "completed",
+      "orderDate": "2025-09-03T11:11:47.067Z"
     }
   ]
 }

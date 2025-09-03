@@ -14,6 +14,7 @@ import {
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "./useAuth";
 import { toast } from "sonner";
+import { Spinner } from "@/components/ui/shadcn-io/spinner";
 
 const schema = z.object({
   email: z.string().email("Invalid email"),
@@ -21,7 +22,7 @@ const schema = z.object({
 });
 
 export default function LoginContainer() {
-  const { login } = useAuth();
+  const { login, authLoading } = useAuth();
   const navigate = useNavigate();
 
   const form = useForm({
@@ -76,8 +77,8 @@ export default function LoginContainer() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
-              Login
+            <Button disabled={authLoading} type="submit" className="w-full">
+              Login {authLoading && <Spinner />}
             </Button>
           </form>
         </Form>

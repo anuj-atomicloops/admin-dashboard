@@ -29,10 +29,12 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { useTheme } from "@/providers/theme-provider";
 import { useAuth } from "@/container/auth/useAuth";
+import { FormDialog } from "@/layouts/FormDialog";
 
-export function NavUser({
-  user,
-}: {
+import { useState } from "react";
+import { Spinner } from "./ui/shadcn-io/spinner";
+
+export function NavUser({}: {
   user: {
     name: string;
     email: string;
@@ -41,7 +43,19 @@ export function NavUser({
 }) {
   const { isMobile } = useSidebar();
   const { theme, setTheme } = useTheme();
-  const { logout } = useAuth();
+  const { logout, authLoading } = useAuth();
+
+  const { user } = useAuth();
+
+  console.log(user);
+
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const dialogProps = {
+    title: "profile",
+    dialogOpen,
+    setDialogOpen,
+  };
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -52,11 +66,15 @@ export function NavUser({
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg">AK</AvatarFallback>
+                <AvatarImage src={user.photoURL} alt={user.displayName} />
+                <AvatarFallback className="rounded-lg">
+                  {user?.displayName?.charAt(0).toUpperCase() || ""}
+                </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{user.name}</span>
+                <span className="truncate font-medium capitalize ">
+                  {user.displayName}
+                </span>
                 <span className="truncate text-xs">{user.email}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
@@ -71,11 +89,13 @@ export function NavUser({
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
+                  <AvatarImage src={user.photoURL} alt={user.displayName} />
                   <AvatarFallback className="rounded-lg">AK</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">{user.name}</span>
+                  <span className="truncate font-medium">
+                    {user.displayName}
+                  </span>
                   <span className="truncate text-xs">{user.email}</span>
                 </div>
               </div>
@@ -104,30 +124,28 @@ export function NavUser({
 
             <DropdownMenuSeparator />
 
-            <DropdownMenuGroup>
+            {/* <DropdownMenuGroup>
               <DropdownMenuItem>
                 <Sparkles />
                 Upgrade to Pro
               </DropdownMenuItem>
-            </DropdownMenuGroup>
+            </DropdownMenuGroup> */}
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <BadgeCheck />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem>
+              <FormDialog {...dialogProps} />
+
+              {/* <DropdownMenuItem>
                 <CreditCard />
                 Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem>
+              </DropdownMenuItem> */}
+              {/* <DropdownMenuItem>
                 <Bell />
                 Notifications
-              </DropdownMenuItem>
+              </DropdownMenuItem> */}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={logout}>
-              <LogOut />
+            <DropdownMenuItem disabled={authLoading} onClick={logout}>
+              {authLoading ? <Spinner /> : <LogOut />}
               Log out
             </DropdownMenuItem>
           </DropdownMenuContent>

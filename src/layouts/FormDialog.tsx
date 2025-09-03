@@ -10,6 +10,9 @@ import { Button } from "@/components/ui/button";
 import AddUserForm from "@/container/users/AddUserForm";
 import AddProductsrForm from "@/container/products/AddProductsrForm";
 import AddOrdersForm from "@/container/orders/AddOrdersForm";
+import ProfileForm from "@/container/auth/ProfileForm";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { BadgeCheck } from "lucide-react";
 
 export function FormDialog({
   title,
@@ -24,22 +27,34 @@ export function FormDialog({
   statuses,
   users,
   products,
+
 }: any) {
   return (
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>
-        <Button variant="default">Add new {title}</Button>
+        {title === "profile" ? (
+          <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+            <BadgeCheck />
+            Account
+          </DropdownMenuItem>
+        ) : (
+          <Button variant="default">Add new {title}</Button>
+        )}
       </DialogTrigger>
       <DialogContent className="max-w-lg max-h-[80vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>
-            {form?.id ? "Edit" : "Add new"} {title}
-          </DialogTitle>
-          <DialogDescription>
-            {form?.id
-              ? `Update details for this ${title}.`
-              : `Fill in the details below to create a new ${title}.`}
-          </DialogDescription>
+          {title === "profile" ? null : (
+            <>
+              <DialogTitle>
+                {form?.id ? "Edit" : ` Add new ${title}`}
+              </DialogTitle>
+              <DialogDescription>
+                {form?.id
+                  ? `Update details for this ${title}.`
+                  : `Fill in the details below to create a new ${title}.`}
+              </DialogDescription>
+            </>
+          )}
         </DialogHeader>
 
         {title === "user" ? (
@@ -58,6 +73,8 @@ export function FormDialog({
             processSubmit={processSubmit}
             statuses={statuses}
           />
+        ) : title === "profile" ? (
+          <ProfileForm setDialogOpen={setDialogOpen}/>
         ) : (
           <h1>Add a form</h1>
         )}
